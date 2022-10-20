@@ -1,13 +1,58 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.nav ul {
+  margin-top: 100px;
+  position: relative;
+  text-align: left;
+  list-style: none;
+  font-size: 13px;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 2em;
+  transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  cursor: pointer;
+}
+
+.nav ul li a {
+  display: flex;
+  text-decoration: none;
+  margin-bottom: 7px;
+  font-size: 16x;
+  color: rgb(194, 184, 184);
+  font-weight: 400;
+  transition: all 0.3s ease 0s;
+  margin-left: 25px;
+}
+.nav ul li svg {
+  margin-right: 10px;
+}
+
+nav ul li a:hover,
+nav ul li svg:hover {
+  color: white;
+}
+
+ul li a {
+  display: flex;
+  text-decoration: none;
+  margin-bottom: 7px;
+  font-size: 16x;
+  color: rgb(194, 184, 184);
+  font-weight: 400;
+  transition: all 0.3s ease 0s;
+  margin-left: 25px;
+  padding-bottom: 10px;
+}
+
+ul li svg {
+  margin-right: 10px;
 }
