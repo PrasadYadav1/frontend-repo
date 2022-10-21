@@ -13,7 +13,7 @@ const Header = () => {
     <>
       <AppBar position="static">
         <Container
-          maxWidth="xl"
+          maxWidth={false}
           sx={{
             backgroundColor: "black",
             height: { xs: "50px", sm: "80px" },
