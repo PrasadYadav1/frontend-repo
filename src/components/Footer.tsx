@@ -1,118 +1,136 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import GoogleIcon from "@mui/icons-material/Google";
+import "../css/Footer.css";
 
-const useStyles = makeStyles((theme) => ({
-  rootBox: {
-    [theme.breakpoints.down("md")]: {
-      justifyContent: "center",
-    },
-  },
-  footerNav: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    marginRight: "auto",
-    marginLeft: theme.spacing(3),
-    marginBottom: theme.spacing(0),
-
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      marginLeft: "auto",
-      marginTop: theme.spacing(3),
-      marginBottom: theme.spacing(2),
-    },
-  },
-  footerLink: {
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(3),
-    [theme.breakpoints.down("md")]: {
-      marginBottom: theme.spacing(2),
-    },
-  },
-}));
-
-export default function Footer() {
-  const classes = useStyles();
-
-  const content = {
-    brand: { image: "nereus-assets/img/nereus-light.png", width: 110 },
-    copy: "© 2020 Nereus All rights reserved.",
-    link1: "First Link",
-    link2: "Second Link",
-    link3: "Third Link",
-    link4: "Fourth Link",
-  };
-
-  let brand;
-
-  if (content.brand.image) {
-    brand = (
-      <img src={content.brand.image} alt="" width={content.brand.width} />
-    );
-  } else {
-  }
-
+const Footer = () => {
   return (
     <footer>
-      <Container maxWidth="lg">
-        <Box
-          py={6}
-          display="flex"
-          flexWrap="wrap"
-          alignItems="center"
-          className={classes.rootBox}
-        >
-          <Link href="#" color="inherit" underline="none">
-            {brand}
-          </Link>
-          <Box component="nav" className={classes.footerNav}>
-            <Link
-              href="#"
-              variant="body1"
-              color="textPrimary"
-              className={classes.footerLink}
-            >
-              {content["link1"]}
-            </Link>
-            <Link
-              href="#"
-              variant="body1"
-              color="textPrimary"
-              className={classes.footerLink}
-            >
-              {content["link2"]}
-            </Link>
-            <Link
-              href="#"
-              variant="body1"
-              color="textPrimary"
-              className={classes.footerLink}
-            >
-              {content["link3"]}
-            </Link>
-            <Link
-              href="#"
-              variant="body1"
-              color="textPrimary"
-              className={classes.footerLink}
-            >
-              {content["link4"]}
-            </Link>
-          </Box>
-          <Typography
-            color="textSecondary"
-            component="p"
-            variant="caption"
-            gutterBottom={false}
-          >
-            {content["copy"]}
-          </Typography>
-        </Box>
-      </Container>
+      <Box
+        textAlign="center"
+        bgcolor="black"
+        className="social-media-bg"
+        pt={{ xs: 2, sm: 2 }}
+        pb={{ xs: 1, sm: 1 }}
+      >
+        <Grid container spacing={2} justifyContent="center">
+          <Grid item mx={{ xs: 2, sm: 2 }}>
+            <GoogleIcon
+              style={{ color: "white" }}
+              color="disabled"
+              fontSize="large"
+            />
+          </Grid>
+          <Grid item mx={{ xs: 2, sm: 2 }}>
+            <LinkedInIcon
+              style={{ color: "white" }}
+              color="disabled"
+              fontSize="large"
+            />
+          </Grid>
+          <Grid item mx={{ xs: 2, sm: 2 }}>
+            <FacebookIcon style={{ color: "white" }} fontSize="large" />
+          </Grid>
+          <Grid item mx={{ xs: 2, sm: 2 }}>
+            <InstagramIcon
+              style={{ color: "white" }}
+              color="disabled"
+              fontSize="large"
+            />
+          </Grid>
+        </Grid>
+      </Box>
+      <Box
+        px={{ xs: 3, sm: 6 }}
+        py={{ xs: 5, sm: 6 }}
+        color="white"
+        className="bg-footer"
+      >
+        <Container maxWidth={false}>
+          <Grid container spacing={8} color="yellow">
+            <Grid item xs={12} sm={4}>
+              <Box borderBottom={4} alignSelf="center">
+                Help
+              </Box>
+              <Box>
+                <Link href="#" sx={{ color: "white" }}>
+                  Contact Us
+                </Link>
+              </Box>
+              <Box>
+                <Link href="#" sx={{ color: "white" }}>
+                  Support
+                </Link>
+              </Box>
+              <Box>
+                <Link href="#" sx={{ color: "white" }}>
+                  Privacy
+                </Link>
+              </Box>
+            </Grid>
+
+            {/* second grid */}
+            <Grid item xs={12} sm={4}>
+              <Box borderBottom={4} justifyContent="center">
+                Account
+              </Box>
+              <Box>
+                <Link justifyContent="center" href="#" sx={{ color: "white" }}>
+                  Login
+                </Link>
+              </Box>
+              <Box>
+                <Link href="#" sx={{ color: "white" }}>
+                  Register
+                </Link>
+              </Box>
+              {/* <Box>
+                <Link to="#" color="inherit">
+                  Privacy
+                </Link>
+              </Box> */}
+            </Grid>
+
+            {/* third grid */}
+            <Grid item xs={12} sm={4}>
+              <Box borderBottom={4}>Messages</Box>
+              <Box>
+                <Link href="#" sx={{ color: "white" }}>
+                  Backup
+                </Link>
+              </Box>
+              <Box>
+                <Link href="#" sx={{ color: "white" }}>
+                  History
+                </Link>
+              </Box>
+              <Box>
+                <Link href="#" sx={{ color: "white" }}>
+                  Roll
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+      <Box
+        textAlign="center"
+        className="copyright"
+        pt={{ xs: 4, sm: 4 }}
+        pb={{ xs: 2, sm: 4 }}
+      >
+        <Grid container spacing={2} justifyContent="center">
+          Copyright @2022
+        </Grid>
+      </Box>
     </footer>
   );
-}
+};
+
+export default Footer;
