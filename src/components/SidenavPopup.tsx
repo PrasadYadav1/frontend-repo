@@ -25,7 +25,7 @@ export default function SideNavPopup() {
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { sm: "none" }, paddingLeft: 4 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
@@ -77,7 +77,11 @@ export default function SideNavPopup() {
       >
         <List>
           {NavBarData.map((data: any) => (
-            <ListItem key={data.title} disablePadding>
+            <ListItem
+              key={data.title}
+              disablePadding
+              sx={{ marginRight: "20px" }}
+            >
               <Link
                 to={data.path}
                 style={{ textDecoration: "none", color: "white" }}
