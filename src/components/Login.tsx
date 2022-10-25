@@ -38,7 +38,6 @@ const Login = () => {
   const errRef = useRef();
 
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSucess] = useState(true);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const passwordRef = React.createRef<HTMLInputElement>();
@@ -62,10 +61,8 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const userEmail = userRef.current?.value;
-    const userPassword = passwordRef.current?.value;
-    setEmail(userEmail);
-    setPassword(userPassword);
+    setEmail(userRef.current?.value);
+    setPassword(passwordRef.current?.value);
 
     AuthService.login(email, password).then(
       () => {

@@ -21,10 +21,17 @@ import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCale
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
-
+import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 
 function LandingPage() {
+  const navigate = useNavigate();
+  const Logout = () => {
+    window.localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   const { pathname } = useLocation();
   const drawer = (
     <div className="nav">

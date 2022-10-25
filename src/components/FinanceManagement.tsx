@@ -13,6 +13,7 @@ function FinanceManagement() {
   // console.log(tableData);
   return (
     <>
+      <h1>Finance Management page</h1>
       {/* http://103.242.116.207:9000/api/cash-flow/all */}
       {/* <MyAwesomeTable />
       <StickyHeadTable /> */}

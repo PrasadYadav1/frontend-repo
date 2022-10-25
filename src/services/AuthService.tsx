@@ -35,34 +35,22 @@ const login = (email: string, password: string) => {
       if (response.data?.token) {
         localStorage.setItem("token", JSON.stringify(response.data.token));
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userId", JSON.stringify(response.data.user.id));
       }
 
       return response.data;
     });
 };
 
-// const login = (email, password) => {
-//   return axios
-//     .post(LOGIN_URL, {
-//       email,
-//       password,
-//     })
-//     .then((response) => {
-//       if (response.data.accessToken) {
-//         localStorage.setItem("user", JSON.stringify(response.data));
-//       }
-
-//       return response.data;
-//     });
-// };
-
 const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("userId");
 };
 
 const getCurrentUser = () => {
   var user = {
+    userId: localStorage.getItem("userId") || "",
     token: localStorage.getItem("token") || "",
     isLoggedIn: localStorage.getItem("isLoggedIn") || "",
   };

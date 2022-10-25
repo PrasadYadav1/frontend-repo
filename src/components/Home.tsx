@@ -1,66 +1,67 @@
-
-import React from "react";
+import React, { useEffect } from "react";
 import userService from "../services/userService";
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AuthService from "../services/AuthService";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
-export default class Home extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
+var data: any;
 
-    this.state = {
-      content: "",
-    };
-  }
+function Home() {
+  const navigate = useNavigate();
+  const Logout = () => {
+    window.localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("token");
+    navigate("/login");
+  };
 
-  componentDidMount() {
-    userService.getUser(70).then(
+  const [isLoading, setIsLoading] = useState(true);
+  const [errMsg, setErrMsg] = useState("");
+
+  useEffect(() => {
+    const currUser = AuthService.getCurrentUser();
+
+    userService.getUser(Number(currUser.userId)).then(
       (response) => {
-        this.setState({
-          content: response.data,
-        });
+        setIsLoading(false);
+        data = response.data;
+        // console.log(data);
       },
       (error) => {
-        this.setState({
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString(),
-        });
+        // error.response && error.response.data
+        setErrMsg(error.message || error.toString());
       }
     );
-  }
+  }, []);
 
-  render() {
-    const data = AuthService.getCurrentUser();
-    return (
-      <>
-        <Box className="" pt={{ xs: 4, sm: 4 }} pb={{ xs: 2, sm: 4 }} mt="12">
-          <Grid container spacing={2} justifyContent="center" marginTop={12}>
-            <div className="container">
-              <Typography variant="h3">
-                isLoggedIn: {data.isLoggedIn}
-              </Typography>{" "}
-              <Typography variant="h3">ID: {this.state.content.id}</Typography>{" "}
-              <br />
-              <Typography variant="h5">
-                Name: {this.state.content.firstName}
-              </Typography>
-              <Typography variant="h5">
-                Email: {this.state.content.email}
-              </Typography>
-              <Typography variant="h5">
-                Gender: {this.state.content.gender}
-              </Typography>
-              <Typography variant="h5">
-                Mobile: {this.state.content.primaryMobile}
-              </Typography>
-            </div>
-          </Grid>
-        </Box>
-      </>
-    );
-  }
+  return (
+    <>
+      <Box className="" pt={{ xs: 4, sm: 4 }} pb={{ xs: 2, sm: 4 }} mt="12">
+        <Grid container spacing={2} justifyContent="center" marginTop={12}>
+          {/* <div className="container">
+            <Typography variant="h3">ID: {data.id}</Typography> <br />
+            <Typography variant="h5">Name: {data.firstName}</Typography>
+            <Typography variant="h5">Email: {data.email}</Typography>
+            <Typography variant="h5">Gender: {data.gender}</Typography>
+            <Typography variant="h5">Mobile: {data.primaryMobile}</Typography>
+          </div> */}
+          <Typography variant="h3">Home Page</Typography>
+          <Button
+            sx={{ marginLeft: "10px" }}
+            variant="contained"
+            onClick={Logout}
+          >
+            Logout
+          </Button>
+        </Grid>
+      </Box>
+    </>
+  );
+}
+
+export default Home;
