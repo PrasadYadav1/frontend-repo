@@ -7,27 +7,27 @@ import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 export const NavBarData = [
   {
     title: "Employee's Home",
-    path: "/",
+    path: "/landingpage",
     icon: <HomeIcon />,
   },
   {
     title: "Organizational Chart",
-    path: "/orgchart",
+    path: "/landingpage/orgchart",
     icon: <AccountTreeIcon />,
   },
   {
     title: "Leave Management",
-    path: "/leavemanagement",
+    path: "/landingpage/leavemanagement",
     icon: <CalendarMonthIcon />,
   },
   {
     title: "Finance Management",
-    path: "/financemanagement",
+    path: "/landingpage/financemanagement",
     icon: <LocalLibraryIcon />,
   },
   {
     title: "Learning & Development",
-    path: "/learningdevelopment",
+    path: "/landingpage/learningdevelopment",
     icon: <CastForEducationIcon />,
   },
 ];

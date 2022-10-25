@@ -5,7 +5,7 @@ import { Navigate, useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import Login from "./Login";
 
-const LandingPage = () => {
+const LandingPage1 = () => {
   const [authenticated, setauthenticated] = useState<any | null>(null);
   const navigate = useNavigate();
   // parsing jwt token
@@ -66,4 +66,4 @@ const LandingPage = () => {
   }
 };
 
-export default LandingPage;
+export default LandingPage1;
