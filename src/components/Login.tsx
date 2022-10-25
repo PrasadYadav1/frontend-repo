@@ -25,6 +25,7 @@ import "../css/LoginForm.css";
 import axios from "../api/axios";
 import AuthService from "../services/AuthService";
 import { Email } from "@mui/icons-material";
+import userService from "../services/userService";
 const LOGIN_URL = "/sign-in";
 
 const Login = () => {
@@ -63,6 +64,19 @@ const Login = () => {
 
     setEmail(userRef.current?.value);
     setPassword(passwordRef.current?.value);
+
+    // check email registered or not
+    // userService.findUserByEmail(email).then(
+    //   (response) => {
+    //     // setIsLoading(false);
+    //   },
+    //   (error) => {
+    //     // error.response && error.response.data
+    //     setErrMsg("Email Not registered");
+    //     return;
+    //   }
+    // );
+    // console.log(userService.findUserByEmail(email));
 
     AuthService.login(email, password).then(
       () => {
@@ -197,7 +211,7 @@ const Login = () => {
                 {/* forgot pass and sign up links */}
                 <div className="links">
                   <Link to="#">Forgot Password ?</Link>
-                  <Link to="/ti/signup" className="text-white">
+                  <Link to="/signup" className="text-white">
                     Signup
                   </Link>
                 </div>
