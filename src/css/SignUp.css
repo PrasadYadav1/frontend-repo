@@ -1,0 +1,50 @@
+.error {
+    color: #fc8181;
+    font-size: 0.75rem;
+    text-align: left;
+    margin-top: 0.25rem;
+    margin-left: 1.50rem;
+  }
+
+  button {
+    display: block;
+    margin: 1rem 0;
+    padding: 0.35rem 0.5rem;
+    background-color: #4299e1;
+    color: #1a202c;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  button:hover{
+    font-weight: bold;
+  }
+  TextField.input-error,
+  FormControl.input-error {
+    border-color: #fc8181;
+  }
+
+  button:disabled {
+    opacity: 0.35;
+  }
+  .link {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    color: #302626;
+    text-decoration: rgb(49, 49, 34);
+  }
+  .link a {
+    margin: 10px 0;  
+    color: #413333;
+    text-decoration: rgb(134, 134, 82);
+  }
+
+  .link:hover {
+    font-weight: bold;
+
+
+  }

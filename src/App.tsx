@@ -3,7 +3,6 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
-import Signup from "./components/Signup";
 import LandingPage from "./components/LandingPage";
 import LandingPage1 from "./components/LandingPage1";
 import Organizations from "./components/Organization";
@@ -13,6 +12,7 @@ import LeaveManagement from "./components/LeaveManagement";
 import LearningDevelopment from "./components/LearningDevelopment";
 import NotFound from "./components/NotFound";
 import Protected from "./components/Protected";
+import SignUp from "./components/Signup";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route index element={<Login />} />
         <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
+        <Route path="signup" element={<SignUp />} />
 
         <Route
           path="/landingpage1"

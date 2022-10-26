@@ -91,12 +91,12 @@ const Footer = () => {
                 Account
               </Box>
               <Box>
-                <Link justifyContent="center" href="#" sx={{ color: "white" }}>
-                  Login
+                <Link href="login" sx={{ color: "white" }}>
+                  Log In
                 </Link>
               </Box>
               <Box>
-                <Link href="#" sx={{ color: "white" }}>
+                <Link href="signup" sx={{ color: "white" }}>
                   Register
                 </Link>
               </Box>
