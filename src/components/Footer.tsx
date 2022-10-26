@@ -28,14 +28,24 @@ const Footer = () => {
             />
           </Grid>
           <Grid item mx={{ xs: 2, sm: 2 }}>
-            <LinkedInIcon
-              style={{ color: "white" }}
-              color="disabled"
-              fontSize="large"
-            />
+            <Link
+              target="_blank"
+              href="https://www.linkedin.com/company/technoidentity-solutions-pvt-ltd/"
+            >
+              <LinkedInIcon
+                style={{ color: "white" }}
+                color="disabled"
+                fontSize="large"
+              />
+            </Link>
           </Grid>
           <Grid item mx={{ xs: 2, sm: 2 }}>
-            <FacebookIcon style={{ color: "white" }} fontSize="large" />
+            <Link
+              target="_blank"
+              href="https://www.facebook.com/technoidentitysolution/"
+            >
+              <FacebookIcon style={{ color: "white" }} fontSize="large" />
+            </Link>
           </Grid>
           <Grid item mx={{ xs: 2, sm: 2 }}>
             <InstagramIcon
@@ -81,12 +91,12 @@ const Footer = () => {
                 Account
               </Box>
               <Box>
-                <Link justifyContent="center" href="#" sx={{ color: "white" }}>
-                  Login
+                <Link href="login" sx={{ color: "white" }}>
+                  Log In
                 </Link>
               </Box>
               <Box>
-                <Link href="#" sx={{ color: "white" }}>
+                <Link href="signup" sx={{ color: "white" }}>
                   Register
                 </Link>
               </Box>

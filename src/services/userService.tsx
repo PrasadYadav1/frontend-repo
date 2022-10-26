@@ -16,7 +16,7 @@ class UserService {
     return axios.get(API_URL + "user/" + id, { headers: authHeader() });
   }
 
-  findUserById(email: string) {
+  findUserByEmail(email: string) {
     return axios.get(API_URL + "user/" + email, { headers: authHeader() });
   }
 
