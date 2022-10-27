@@ -68,7 +68,7 @@ const SignUp = () => {
       .required("Required")
       .matches(/^[6-9]\d{9}$/, "Phone number is not valid"),
     alternativeMobile: Yup.string().matches(
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      /^[6-9]\d{9}$/,
       "Phone number is not valid"
     ),
     gender: Yup.string().required("Required"),
@@ -77,7 +77,7 @@ const SignUp = () => {
     password: Yup.string()
       .required("Please Enter your password")
       .min(6, "Password must be at least 6 characters")
-      .max(20, "Password must not exceed 10 characters")
+      .max(20, "Password must not exceed 20 characters")
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
@@ -122,7 +122,6 @@ const SignUp = () => {
     );
     actions.resetForm();
   };
-  // };
 
   const {
     values,
@@ -155,9 +154,6 @@ const SignUp = () => {
   });
 
   const classes = useStyles();
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  // };
 
   return (
     <>

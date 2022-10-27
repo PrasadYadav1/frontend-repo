@@ -211,9 +211,7 @@ const Login = () => {
                 {/* forgot pass and sign up links */}
                 <div className="links">
                   <Link to="#">Forgot Password ?</Link>
-                  <Link to="/signup" className="text-white">
-                    Signup
-                  </Link>
+                  <Link to="/signup">SignUp</Link>
                 </div>
 
                 {/* error message */}
