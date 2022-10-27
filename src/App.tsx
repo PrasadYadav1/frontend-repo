@@ -13,6 +13,7 @@ import LearningDevelopment from "./components/LearningDevelopment";
 import NotFound from "./components/NotFound";
 import Protected from "./components/Protected";
 import SignUp from "./components/Signup";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route index element={<Login />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="forgotpassword" element={<ForgotPassword />} />
 
         <Route
           path="/landingpage1"

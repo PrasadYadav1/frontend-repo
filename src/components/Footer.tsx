@@ -2,7 +2,7 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -30,7 +30,7 @@ const Footer = () => {
           <Grid item mx={{ xs: 2, sm: 2 }}>
             <Link
               target="_blank"
-              href="https://www.linkedin.com/company/technoidentity-solutions-pvt-ltd/"
+              to="https://www.linkedin.com/company/technoidentity-solutions-pvt-ltd/"
             >
               <LinkedInIcon
                 style={{ color: "white" }}
@@ -42,7 +42,7 @@ const Footer = () => {
           <Grid item mx={{ xs: 2, sm: 2 }}>
             <Link
               target="_blank"
-              href="https://www.facebook.com/technoidentitysolution/"
+              to="https://www.facebook.com/technoidentitysolution/"
             >
               <FacebookIcon style={{ color: "white" }} fontSize="large" />
             </Link>
@@ -69,17 +69,29 @@ const Footer = () => {
                 Help
               </Box>
               <Box>
-                <Link href="#" sx={{ color: "white" }}>
+                <Link
+                  to="#"
+                  style={{ textDecoration: "none" }}
+                  className="links-footer"
+                >
                   Contact Us
                 </Link>
               </Box>
               <Box>
-                <Link href="#" sx={{ color: "white" }}>
+                <Link
+                  to="#"
+                  style={{ textDecoration: "none" }}
+                  className="links-footer"
+                >
                   Support
                 </Link>
               </Box>
               <Box>
-                <Link href="#" sx={{ color: "white" }}>
+                <Link
+                  to="#"
+                  style={{ textDecoration: "none" }}
+                  className="links-footer"
+                >
                   Privacy
                 </Link>
               </Box>
@@ -91,12 +103,20 @@ const Footer = () => {
                 Account
               </Box>
               <Box>
-                <Link href="login" sx={{ color: "white" }}>
+                <Link
+                  to="/login"
+                  style={{ textDecoration: "none" }}
+                  className="links-footer"
+                >
                   Log In
                 </Link>
               </Box>
               <Box>
-                <Link href="signup" sx={{ color: "white" }}>
+                <Link
+                  to="/signup"
+                  style={{ textDecoration: "none" }}
+                  className="links-footer"
+                >
                   Register
                 </Link>
               </Box>
@@ -111,17 +131,29 @@ const Footer = () => {
             <Grid item xs={12} sm={4}>
               <Box borderBottom={4}>Messages</Box>
               <Box>
-                <Link href="#" sx={{ color: "white" }}>
+                <Link
+                  to="#"
+                  style={{ textDecoration: "none" }}
+                  className="links-footer"
+                >
                   Backup
                 </Link>
               </Box>
               <Box>
-                <Link href="#" sx={{ color: "white" }}>
+                <Link
+                  to="#"
+                  style={{ textDecoration: "none" }}
+                  className="links-footer"
+                >
                   History
                 </Link>
               </Box>
               <Box>
-                <Link href="#" sx={{ color: "white" }}>
+                <Link
+                  to="#"
+                  style={{ textDecoration: "none" }}
+                  className="links-footer"
+                >
                   Roll
                 </Link>
               </Box>

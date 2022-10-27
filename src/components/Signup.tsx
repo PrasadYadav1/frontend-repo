@@ -68,7 +68,7 @@ const SignUp = () => {
       .required("Required")
       .matches(/^[6-9]\d{9}$/, "Phone number is not valid"),
     alternativeMobile: Yup.string().matches(
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      /^[6-9]\d{9}$/,
       "Phone number is not valid"
     ),
     gender: Yup.string().required("Required"),
@@ -77,7 +77,7 @@ const SignUp = () => {
     password: Yup.string()
       .required("Please Enter your password")
       .min(6, "Password must be at least 6 characters")
-      .max(10, "Password must not exceed 10 characters")
+      .max(20, "Password must not exceed 20 characters")
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
@@ -86,7 +86,7 @@ const SignUp = () => {
       .label("Password Confirm")
       .required()
       .oneOf([Yup.ref("password"), null], "Confirm Passwords does not match"),
-    acceptTerms: Yup.bool().oneOf([true], "Accept Terms is required"),
+    acceptTerms: Yup.bool().oneOf([true], "Required"),
   });
 
   const onSubmit = async (values: any, actions: any) => {
@@ -122,7 +122,6 @@ const SignUp = () => {
     );
     actions.resetForm();
   };
-  // };
 
   const {
     values,
@@ -155,9 +154,6 @@ const SignUp = () => {
   });
 
   const classes = useStyles();
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  // event.preventDefault();
-  // };
 
   return (
     <>
@@ -179,8 +175,6 @@ const SignUp = () => {
                 flexGrow: 1,
                 minWidth: 300,
                 transform: "translateZ(0)",
-                // The position fixed scoping doesn't work in IE11.
-                // Disable this demo to preserve the others.
                 "@media all and (-ms-high-contrast: none)": {
                   display: "none",
                 },
@@ -225,12 +219,6 @@ const SignUp = () => {
                       </Button>
                     </strong>
                   </Alert>
-                  {/* <Typography id="server-modal-title" variant="h6" component="h2">
- Server-side modal
- </Typography>
- <Typography id="server-modal-description" sx={{ pt: 2 }}>
- If you disable JavaScript, you will still see me.
- </Typography> */}
                 </Box>
               </Modal>
             </Box>
@@ -247,8 +235,8 @@ const SignUp = () => {
               >
                 SIGN UP
               </Typography>
-              <Grid container spacing={3}>
-                <Grid item columns={{ xs: 4, sm: 12 }}>
+              <Grid container spacing={3} columns={{ xs: 4, sm: 12 }}>
+                <Grid item xs={4}>
                   <TextField
                     name="firstName"
                     onChange={handleChange}
@@ -268,7 +256,7 @@ const SignUp = () => {
                     <p className="error">{errors.firstName}</p>
                   )}
                 </Grid>
-                <Grid item columns={{ xs: 4, sm: 12 }}>
+                <Grid item xs={4}>
                   <TextField
                     name="middleName"
                     type="text"
@@ -290,7 +278,7 @@ const SignUp = () => {
                     <p className="error">{errors.middleName}</p>
                   )}
                 </Grid>
-                <Grid item columns={{ xs: 4, sm: 12 }}>
+                <Grid item xs={4}>
                   <TextField
                     name="lastName"
                     type="text"
@@ -445,14 +433,19 @@ const SignUp = () => {
                 {errors.gender && touched.gender && (
                   <p className="error">{errors.gender}</p>
                 )}
-                <Grid container spacing={3} columns={{ xs: 6, sm: 12 }}>
+                <Grid
+                  container
+                  spacing={3}
+                  columns={{ xs: 6, sm: 12 }}
+                  sx={{ mt: 1, ml: 0 }}
+                >
                   <Grid item xs={6}>
                     <TextField
                       name="roleId"
                       onChange={handleChange}
                       value={values.roleId}
                       type="number"
-                      sx={{ mt: 3, ml: 2, mb: 3, mr: 2 }}
+                      sx={{ m: 1 }}
                       fullWidth
                       label="Role ID"
                       variant="outlined"
@@ -475,7 +468,7 @@ const SignUp = () => {
                     <TextField
                       name="designation"
                       id="designation"
-                      sx={{ mt: 3, ml: 2, mb: 3, mr: 2 }}
+                      sx={{ m: 1 }}
                       fullWidth
                       label="Designation"
                       onChange={handleChange}
@@ -497,10 +490,15 @@ const SignUp = () => {
                     )}
                   </Grid>
                 </Grid>
-                <Grid container spacing={3} columns={{ xs: 6, sm: 12 }}>
+                <Grid
+                  container
+                  spacing={3}
+                  columns={{ xs: 6, sm: 12 }}
+                  sx={{ mt: 1, ml: 0 }}
+                >
                   <Grid item xs={6}>
                     <FormControl variant="outlined" fullWidth>
-                      <InputLabel htmlFor="password" sx={{ margin: 3 }}>
+                      <InputLabel htmlFor="password" sx={{ m: 1 }}>
                         Password
                       </InputLabel>
                       <OutlinedInput
@@ -514,7 +512,7 @@ const SignUp = () => {
                         }
                         onChange={handleChange}
                         value={values.password}
-                        sx={{ mt: 3, ml: 2, mb: 3, mr: 2 }}
+                        sx={{ m: 1 }}
                         fullWidth
                         autoComplete="off"
                         endAdornment={
@@ -542,7 +540,7 @@ const SignUp = () => {
                   </Grid>
                   <Grid item xs={6}>
                     <FormControl variant="outlined" fullWidth>
-                      <InputLabel htmlFor="confirmPassword" sx={{ margin: 3 }}>
+                      <InputLabel htmlFor="confirmPassword" sx={{ m: 1 }}>
                         Confirm Password
                       </InputLabel>
                       <OutlinedInput
@@ -550,7 +548,7 @@ const SignUp = () => {
                         type={showconfirmPassword ? "text" : "password"}
                         onChange={handleChange}
                         value={values.confirmPassword}
-                        sx={{ mt: 3, ml: 2, mb: 3, mr: 2 }}
+                        sx={{ m: 1 }}
                         fullWidth
                         onBlur={handleBlur}
                         className={
@@ -592,9 +590,9 @@ const SignUp = () => {
                           : ""
                       }
                       onChange={handleChange}
-                      sx={{ margin: 3 }}
+                      sx={{ margin: 2 }}
                       value={values.acceptTerms}
-                      label=" I agree to the Terms and Conditions"
+                      label="  I agree to the Terms and Conditions"
                     />
                   </Grid>
                 </Grid>

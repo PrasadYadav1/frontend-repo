@@ -6,15 +6,7 @@ import { Navigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
-
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Footer from "./Footer";
@@ -22,11 +14,8 @@ import Grid from "@mui/material/Grid";
 import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/LoginForm.css";
-import axios from "../api/axios";
 import AuthService from "../services/AuthService";
-import { Email } from "@mui/icons-material";
 import userService from "../services/userService";
-const LOGIN_URL = "/sign-in";
 
 const Login = () => {
   // for form
