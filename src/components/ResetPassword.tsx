@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, TextField } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Header from "./Header";
@@ -38,12 +38,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const ResetPassword = () => {
   const [errMsg, setErrMsg] = useState("");
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showconfirmPassword, setshowconfirmPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const handleClickShowConfirmPassword = () =>
+    setshowconfirmPassword(!showconfirmPassword);
+
+  const handleMouseDownConfirmPassword = () =>
+    setshowconfirmPassword(!showconfirmPassword);
   const [success, setSuccess] = useState(false);
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email.").required("Required"),
+    password: Yup.string()
+      .required("Please Enter your password")
+      .min(6, "Password must be at least 6 characters")
+      .max(20, "Password must not exceed 20 characters")
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+      ),
+    confirmPassword: Yup.string()
+      .label("Confirm Password")
+      .required()
+      .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
   });
 
   const onSubmit = async (values: any, actions: any) => {
@@ -52,16 +72,16 @@ const SignUp = () => {
         setSuccess(true);
       },
       (err) => {
-        // console.log(err);
-        // if (!err?.response) {
-        //   setErrMsg("No Server Response");
-        // } else if (err.response?.status === 400) {
-        //   setErrMsg("Missing Username or Password");
-        // } else if (err.response?.status === 401) {
-        //   setErrMsg("Invalid Email or password");
-        // } else {
-        //   setErrMsg("Login Failed");
-        // }
+        console.log(err);
+        if (!err?.response) {
+          setErrMsg("No Server Response");
+        } else if (err.response?.status === 400) {
+          setErrMsg("Missing Username or Password");
+        } else if (err.response?.status === 401) {
+          setErrMsg("Invalid Email or password");
+        } else {
+          setErrMsg("Login Failed");
+        }
       }
     );
     actions.resetForm();
@@ -77,7 +97,8 @@ const SignUp = () => {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      email: "",
+      password: "",
+      confirmPassword: "",
     },
     validationSchema,
     validateOnChange: false,
@@ -146,15 +167,15 @@ const SignUp = () => {
                 >
                   <Alert severity="success">
                     <AlertTitle>Success</AlertTitle>
-                    Reset Password Email sent to Registered Email
+                    Password Changed Successfully
                     <strong>
-                      {/* <Button
+                      <Button
                         href="/login"
                         sx={{ marginLeft: "70px", mt: 2, mb: 2 }}
                         variant="contained"
                       >
                         Login
-                      </Button> */}
+                      </Button>
                     </strong>
                   </Alert>
                 </Box>
@@ -174,40 +195,99 @@ const SignUp = () => {
                   justifyContent: "center",
                   fontFamily: "monospace",
                   fontWeight: 700,
+                  letterSpacing: ".1rem",
                   color: "black",
                   textDecoration: "none",
                   align: "center",
-                  fontSize: { sm: "25px" },
-                  marginBottom: "15px",
+                  fontSize: { sm: "30px" },
+                  marginBottom: "30px",
                 }}
                 gutterBottom
               >
-                Enter Registered Email
+                Enter New Password
               </Typography>
 
-              <Grid container justifyContent="center">
-                <Grid item xs={12}>
-                  <TextField
-                    name="email"
-                    type="email"
-                    onChange={handleChange}
-                    value={values.email}
-                    sx={{ margin: 1, marginRight: "10px" }}
-                    label="Email"
-                    fullWidth
-                    variant="outlined"
-                    autoComplete="off"
-                    onBlur={handleBlur}
-                    className={
-                      errors.email && touched.email ? "input-error" : ""
-                    }
-                  />
-                  <div>
-                    {" "}
-                    {errors.email && touched.email && (
-                      <p className="error">{errors.email}</p>
-                    )}
-                  </div>
+              <Grid
+                container
+                spacing={2}
+                columns={{ xs: 3, sm: 6 }}
+                justifyContent="center"
+              >
+                <Grid item xs={4}>
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel htmlFor="password" sx={{ m: 1 }}>
+                      Password
+                    </InputLabel>
+                    <OutlinedInput
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      onBlur={handleBlur}
+                      className={
+                        errors.password && touched.password ? "input-error" : ""
+                      }
+                      onChange={handleChange}
+                      value={values.password}
+                      sx={{ m: 1 }}
+                      autoComplete="off"
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                    />
+                  </FormControl>
+                  {errors.password && touched.password && (
+                    <p className="error">{errors.password}</p>
+                  )}
+                </Grid>
+                <Grid item xs={4}>
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel htmlFor="confirmPassword" sx={{ m: 1 }}>
+                      Confirm Password
+                    </InputLabel>
+                    <OutlinedInput
+                      name="confirmPassword"
+                      type={showconfirmPassword ? "text" : "password"}
+                      onChange={handleChange}
+                      value={values.confirmPassword}
+                      sx={{ m: 1 }}
+                      onBlur={handleBlur}
+                      className={
+                        errors.confirmPassword && touched.confirmPassword
+                          ? "input-error"
+                          : ""
+                      }
+                      autoComplete="off"
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowConfirmPassword}
+                            onMouseDown={handleMouseDownConfirmPassword}
+                            edge="end"
+                          >
+                            {showconfirmPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="confirmPassword"
+                    />
+                  </FormControl>
+                  {errors.confirmPassword && touched.confirmPassword && (
+                    <p className="error">{errors.confirmPassword}</p>
+                  )}
                 </Grid>
 
                 <Button
@@ -220,9 +300,10 @@ const SignUp = () => {
                     maxHeight: "50px",
                     minWidth: "30px",
                     minHeight: "30px",
+                    marginLeft: "35px",
                   }}
                 >
-                  Submit
+                  Save Password
                 </Button>
 
                 {errMsg == "" ? (
@@ -244,4 +325,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ResetPassword;

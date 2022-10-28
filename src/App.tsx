@@ -14,6 +14,7 @@ import NotFound from "./components/NotFound";
 import Protected from "./components/Protected";
 import SignUp from "./components/Signup";
 import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="forgotpassword" element={<ForgotPassword />} />
+        <Route path="resetpassword" element={<ResetPassword />} />
 
         <Route
           path="/landingpage1"
