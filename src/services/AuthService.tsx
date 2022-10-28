@@ -2,10 +2,10 @@ import axios from "../api/axios";
 const LOGIN_URL = "sign-in";
 const REGISTER_URL = "sign-up";
 // for encryption
-const bcrypt = require("bcryptjs");
-// SALT should be created ONE TIME upon sign up
-const salt = bcrypt.genSaltSync(10);
-const salt1 = bcrypt.genSaltSync(12);
+// const bcrypt = require("bcryptjs");
+// // SALT should be created ONE TIME upon sign up
+// const salt = bcrypt.genSaltSync(10);
+// const salt1 = bcrypt.genSaltSync(12);
 
 // parsing jwt token
 const parseJwt = (token: string) => {
@@ -91,7 +91,7 @@ const reset = (password: string, confirmPassword: string) => {
 
 // login code
 const login = (email: string, password: string) => {
-  password = bcrypt.hashSync(password, salt);
+  // password = bcrypt.hashSync(password, salt);
 
   return axios
     .post(
