@@ -32,6 +32,12 @@ class UserService {
   createCashFlow() {
     return axios.get(API_URL + "cash-flow/create", { headers: AuthHeader() });
   }
+
+  addExpense() {
+    return axios.post("http://103.242.116.207:9000/expense/create", {
+      headers: AuthHeader(),
+    });
+  }
 }
 
 export default new UserService();
