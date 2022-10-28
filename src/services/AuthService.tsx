@@ -57,6 +57,30 @@ const register = (
     });
 };
 
+// reset password
+
+const reset = (password: string, confirmPassword: string) => {
+  return axios
+    .post(
+      LOGIN_URL,
+      // loginFormData,
+      JSON.stringify({ password: password, confirmPassword: confirmPassword }),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      if (response.data?.token) {
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userId", JSON.stringify(response.data.user.id));
+      }
+
+      return response.data;
+    });
+};
+
 // login code
 const login = (email: string, password: string) => {
   return axios
@@ -96,6 +120,7 @@ const getCurrentUser = () => {
 };
 
 const AuthService = {
+  reset,
   register,
   login,
   logout,

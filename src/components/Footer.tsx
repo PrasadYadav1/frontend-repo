@@ -21,13 +21,6 @@ const Footer = () => {
       >
         <Grid container spacing={2} justifyContent="center">
           <Grid item mx={{ xs: 2, sm: 2 }}>
-            <GoogleIcon
-              style={{ color: "white" }}
-              color="disabled"
-              fontSize="large"
-            />
-          </Grid>
-          <Grid item mx={{ xs: 2, sm: 2 }}>
             <Link
               target="_blank"
               to="https://www.linkedin.com/company/technoidentity-solutions-pvt-ltd/"
@@ -46,13 +39,6 @@ const Footer = () => {
             >
               <FacebookIcon style={{ color: "white" }} fontSize="large" />
             </Link>
-          </Grid>
-          <Grid item mx={{ xs: 2, sm: 2 }}>
-            <InstagramIcon
-              style={{ color: "white" }}
-              color="disabled"
-              fontSize="large"
-            />
           </Grid>
         </Grid>
       </Box>

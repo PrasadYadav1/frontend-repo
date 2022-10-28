@@ -15,7 +15,7 @@ import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/LoginForm.css";
 import AuthService from "../services/AuthService";
-import userService from "../services/userService";
+import UserService from "../services/UserService";
 
 const Login = () => {
   // for form
@@ -199,8 +199,10 @@ const Login = () => {
 
                 {/* forgot pass and sign up links */}
                 <div className="links">
-                  <Link to="#">Forgot Password ?</Link>
-                  <Link to="/signup">SignUp</Link>
+                  <Link to="/forgotpassword">Forgot Password ?</Link>
+                  <Link to="/signup" className="text-white">
+                    Signup
+                  </Link>
                 </div>
 
                 {/* error message */}
@@ -214,13 +216,9 @@ const Login = () => {
                 )}
 
                 {/* login button */}
-                <input
-                  className="bg-blue-500 login-button"
-                  type="submit"
-                  value="Login"
-                />
+                <input className="login-button" type="submit" value="Login" />
 
-                <div className="google-btn ml-32">
+                {/* <div className="google-btn ml-32">
                   <div className="google-icon-wrapper mr-2">
                     <img
                       className="google-icon"
@@ -230,7 +228,7 @@ const Login = () => {
                   <p className="btn-text pb-2">
                     <b className="">Sign in with google</b>
                   </p>
-                </div>
+                </div> */}
               </form>
             </div>
           </Grid>
