@@ -10,7 +10,7 @@
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.9",
     "@mui/styled-engine-sc": "^5.10.6",
-    "@mui/x-date-pickers": "^5.0.5",
+    "@mui/x-date-pickers": "^5.0.6",
     "@nadavshaar/react-grid-table": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
