@@ -13,3 +13,13 @@
 {
     background-color: #164f7a;
 }
+
+.links-footer
+{
+    color: white
+   
+}
+.links-footer:hover
+{
+    color: rgb(122, 118, 118);
+}

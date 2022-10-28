@@ -1,14 +1,6 @@
 import axios from "../api/axios";
 const LOGIN_URL = "sign-in";
-
-// register code
-// const register = (username, email, password) => {
-//   return axios.post(API_URL + "signup", {
-//     username,
-//     email,
-//     password,
-//   });
-// };
+const REGISTER_URL = "sign-up";
 
 // parsing jwt token
 const parseJwt = (token: string) => {
@@ -17,6 +9,76 @@ const parseJwt = (token: string) => {
   } catch (e) {
     return null;
   }
+};
+
+// register code
+const register = (
+  firstName: string,
+  middleName: string,
+  lastName: string,
+  gender: string,
+  designation: string,
+  primaryMobile: string,
+  alternativeMobile: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+  roleId: string,
+  profileImage: string
+) => {
+  return axios
+    .post(
+      REGISTER_URL,
+      JSON.stringify({
+        firstName,
+        middleName,
+        lastName,
+        gender,
+        designation,
+        primaryMobile,
+        alternativeMobile,
+        profileImage,
+        email,
+        password,
+        confirmPassword,
+        roleId,
+      }),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      // if (response) {
+      //   console.log(response);
+      // }
+
+      return response.data;
+    });
+};
+
+// reset password
+
+const reset = (password: string, confirmPassword: string) => {
+  return axios
+    .post(
+      LOGIN_URL,
+      // loginFormData,
+      JSON.stringify({ password: password, confirmPassword: confirmPassword }),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      if (response.data?.token) {
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userId", JSON.stringify(response.data.user.id));
+      }
+
+      return response.data;
+    });
 };
 
 // login code
@@ -58,6 +120,8 @@ const getCurrentUser = () => {
 };
 
 const AuthService = {
+  reset,
+  register,
   login,
   logout,
   getCurrentUser,

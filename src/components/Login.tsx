@@ -6,15 +6,7 @@ import { Navigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
-
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Footer from "./Footer";
@@ -22,10 +14,8 @@ import Grid from "@mui/material/Grid";
 import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/LoginForm.css";
-import axios from "../api/axios";
 import AuthService from "../services/AuthService";
-import { Email } from "@mui/icons-material";
-const LOGIN_URL = "/sign-in";
+import UserService from "../services/UserService";
 
 const Login = () => {
   // for form
@@ -63,6 +53,19 @@ const Login = () => {
 
     setEmail(userRef.current?.value);
     setPassword(passwordRef.current?.value);
+
+    // check email registered or not
+    // userService.findUserByEmail(email).then(
+    //   (response) => {
+    //     // setIsLoading(false);
+    //   },
+    //   (error) => {
+    //     // error.response && error.response.data
+    //     setErrMsg("Email Not registered");
+    //     return;
+    //   }
+    // );
+    // console.log(userService.findUserByEmail(email));
 
     AuthService.login(email, password).then(
       () => {
@@ -196,8 +199,8 @@ const Login = () => {
 
                 {/* forgot pass and sign up links */}
                 <div className="links">
-                  <Link to="#">Forgot Password ?</Link>
-                  <Link to="/ti/signup" className="text-white">
+                  <Link to="/forgotpassword">Forgot Password ?</Link>
+                  <Link to="/signup" className="text-white">
                     Signup
                   </Link>
                 </div>
@@ -213,13 +216,9 @@ const Login = () => {
                 )}
 
                 {/* login button */}
-                <input
-                  className="bg-blue-500 login-button"
-                  type="submit"
-                  value="Login"
-                />
+                <input className="login-button" type="submit" value="Login" />
 
-                <div className="google-btn ml-32">
+                {/* <div className="google-btn ml-32">
                   <div className="google-icon-wrapper mr-2">
                     <img
                       className="google-icon"
@@ -229,7 +228,7 @@ const Login = () => {
                   <p className="btn-text pb-2">
                     <b className="">Sign in with google</b>
                   </p>
-                </div>
+                </div> */}
               </form>
             </div>
           </Grid>

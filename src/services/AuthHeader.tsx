@@ -1,4 +1,4 @@
-export default function authHeader() {
+export default function AuthHeader() {
   const user = JSON.parse(window.localStorage.getItem("isLoggedIn") || "");
   const accessToken = JSON.parse(window.localStorage.getItem("token") || "");
 
