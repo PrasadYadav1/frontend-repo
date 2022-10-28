@@ -56,3 +56,16 @@ ul li a {
 ul li svg {
   margin-right: 10px;
 }
+
+.rgt-cell:not(.rgt-row-edit):not(.rgt-row-not-selectable) {
+  cursor: pointer;
+}
+
+.rgt-cell-header-inner {
+  background-color: #e2bef1 !important;
+  font-weight: bold;
+}
+
+.rgt-wrapper {
+  height: 40% !important;
+}
