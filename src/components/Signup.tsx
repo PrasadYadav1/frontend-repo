@@ -31,6 +31,7 @@ import * as Yup from "yup";
 import { height } from "@mui/system";
 
 const REGISTER_URL = "/sign-up";
+
 const useStyles = makeStyles((theme) => ({
   pageContent: {
     margin: theme.spacing(1),
@@ -120,7 +121,7 @@ const SignUp = () => {
         }
       }
     );
-    actions.resetForm();
+    // actions.resetForm();
   };
 
   const {
