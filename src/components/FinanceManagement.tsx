@@ -33,13 +33,15 @@ function FinanceManagement() {
     "http://103.242.116.207:9000/api/cash-flow/all"
   );
   // const cashFlowColumns = columnsData(cashFlowRows);
-  const [expenseRows] = useFetch("http://103.242.116.207:9000/expense/all");
+  const [expenseRows] = useFetch(
+    "http://103.242.116.207:9000/expense/all?pageSize=100"
+  );
   // const expenseColumns = columnsData(expenseRows);
   const [revenueRows] = useFetch("http://103.242.116.207:9000/revenue/all");
   // const revenueColumns = columnsData(revenueRows);
   return (
     <>
-      <h1>Finance Management page</h1>
+      <h4>Cash Flow page</h4>
       <ReactTable rows={cashFlowRows} columns={cashFlowColumns} />
       <Box sx={{ flexGrow: 1, mt: "50px" }}>
         <Grid
@@ -48,6 +50,7 @@ function FinanceManagement() {
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           <Grid xs={12} sm={12} md={6} lg={6}>
+            <h4>Expense Table</h4>
             <ReactTable rows={expenseRows} columns={expenseColumns} />
             <Grid>
               <Stack direction="row" alignItems="center" spacing={6} mt={2}>
@@ -56,10 +59,12 @@ function FinanceManagement() {
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
                 <TransitionsModal name={"Add Expense"} modalType={true} />
+                {/* <ScrollDialog name={"Add Expense"} modalType={true} /> */}
               </Stack>
             </Grid>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={6}>
+            <h4>Revenue Table</h4>
             <ReactTable rows={revenueRows} columns={revenueColumns} />
             <Grid>
               <Stack direction="row" alignItems="center" spacing={6} mt={2}>
