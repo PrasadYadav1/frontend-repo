@@ -116,7 +116,9 @@ export default function AlertDialog({ data }: Props) {
           severity="success"
           sx={{ width: "100%" }}
         >
-          Expense deleted Successfully
+          {dataType
+            ? "Expense Deleted Successfully"
+            : "Revenue Deleted Successfully"}
         </Alert>
       </Snackbar>
       <Snackbar

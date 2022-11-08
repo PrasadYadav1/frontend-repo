@@ -19,6 +19,18 @@ export const expenseColumns = [
     field: "amount",
     label: "Amount",
     width: "auto",
+    cellRenderer: ({
+      tableManager,
+      value,
+      data,
+      column,
+      colIndex,
+      rowIndex,
+    }: any) => (
+      <div className="rgt-cell-inner rgt-text-truncate" title="amount">
+        <div>&#8377; {data.amount}</div>
+      </div>
+    ),
   },
   {
     id: 4,

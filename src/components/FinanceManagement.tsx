@@ -8,6 +8,7 @@ import TransitionsModal from "./ModalComponent";
 import { cashFlowColumns } from "./componentsData/cashFlowColumns";
 import { expenseColumns } from "./componentsData/expenseColumns";
 import { revenueColumns } from "./componentsData/revenueColumns";
+import InputCapitalDialog from "./InputCapitalDialog";
 
 // const columnsData = (rows: any) => {
 //   const columns: any = [];
@@ -33,15 +34,18 @@ function FinanceManagement() {
     "http://103.242.116.207:9000/api/cash-flow/all"
   );
   // const cashFlowColumns = columnsData(cashFlowRows);
-  const [expenseRows] = useFetch(
-    "http://103.242.116.207:9000/expense/all?pageSize=100"
-  );
+  const [expenseRows] = useFetch("http://103.242.116.207:9000/expense/all");
   // const expenseColumns = columnsData(expenseRows);
   const [revenueRows] = useFetch("http://103.242.116.207:9000/revenue/all");
   // const revenueColumns = columnsData(revenueRows);
   return (
     <>
-      <h4>Cash Flow page</h4>
+      <div style={{ display: "inline-block", width: "100%" }}>
+        <h4 style={{ float: "left", fontSize: "15px" }}>Cash Flow Table</h4>
+        <div style={{ float: "right" }}>
+          <InputCapitalDialog />
+        </div>
+      </div>
       <ReactTable rows={cashFlowRows} columns={cashFlowColumns} />
       <Box sx={{ flexGrow: 1, mt: "50px" }}>
         <Grid
@@ -50,7 +54,11 @@ function FinanceManagement() {
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           <Grid xs={12} sm={12} md={6} lg={6}>
-            <h4>Expense Table</h4>
+            <div style={{ textAlign: "center" }}>
+              <h4 style={{ verticalAlign: "middle", fontSize: "15px" }}>
+                Expense Table
+              </h4>
+            </div>
             <ReactTable rows={expenseRows} columns={expenseColumns} />
             <Grid>
               <Stack direction="row" alignItems="center" spacing={6} mt={2}>
@@ -64,7 +72,11 @@ function FinanceManagement() {
             </Grid>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={6}>
-            <h4>Revenue Table</h4>
+            <div style={{ textAlign: "center" }}>
+              <h4 style={{ verticalAlign: "middle", fontSize: "15px" }}>
+                Revenue Table
+              </h4>
+            </div>
             <ReactTable rows={revenueRows} columns={revenueColumns} />
             <Grid>
               <Stack direction="row" alignItems="center" spacing={6} mt={2}>

@@ -104,6 +104,8 @@ export default function TransitionsModal({ name, modalType }: Props) {
   const [clicked, setClicked] = React.useState("");
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [alertErrorOpen, setAlertErrorOpen] = React.useState(false);
+  const [expenseType, setExpenseType] = React.useState(expenseTypes[0]);
+  const [revenueType, setRevenueType] = React.useState(revenueTypes[0]);
 
   function refreshPage() {
     window.location.reload();
@@ -117,7 +119,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
       transactionDescription: "",
       recipient: "",
       bankName: "",
-      expenseType: "Other-Other",
+      expenseType: expenseType,
       amount: 0,
       recurringExpense: "No",
       repeatExpenseType: "Annually",
@@ -171,7 +173,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
       transactionDescription: "",
       payer: "",
       bankName: "",
-      revenueType: "Other-Revenue",
+      revenueType: revenueType,
       amount: 0,
       recurringRevenue: "No",
       repeatRevenueType: "Annually",
@@ -183,6 +185,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
       const month = selectedDate.getUTCMonth() + 1;
       const day = selectedDate.getUTCDate();
       const year = selectedDate.getUTCFullYear();
+      values.revenueType = revenueType;
       values.transactionDate = year + "-" + month + "-" + day;
       // values.amount = parseInt(values.amount);
       try {
@@ -441,20 +444,20 @@ export default function TransitionsModal({ name, modalType }: Props) {
                     }
                   />
                   <Autocomplete
-                    disablePortal
                     id="combo-box-demo"
                     options={modalType ? expenseTypes : revenueTypes}
                     sx={{ width: "100%" }}
+                    value={modalType ? expenseType : revenueType}
+                    onChange={(event: any, newValue: any) => {
+                      modalType
+                        ? setExpenseType(newValue)
+                        : setRevenueType(newValue);
+                    }}
                     renderInput={(params) => (
                       <TextField
                         {...params}
                         label={modalType ? "Expense Type" : "Revenue Type"}
                         name={modalType ? "expenseType" : "revenueType"}
-                        onChange={
-                          modalType
-                            ? formikExpense.handleChange
-                            : formikRevenue.handleChange
-                        }
                         error={
                           modalType
                             ? formikExpense.touched.expenseType &&

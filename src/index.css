@@ -113,3 +113,7 @@ ul li svg {
 .rgt-container {
   grid-template-columns: repeat(var(--colNum), minmax(0, 1fr)) auto !important;
 } */
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  border: 2px solid blue;
+}

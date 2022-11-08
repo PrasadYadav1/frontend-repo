@@ -171,7 +171,11 @@ export default function EditDialog({ data }: Props) {
   return (
     <div>
       <Tooltip title="Edit">
-        <button style={{ marginLeft: 15 }} onClick={handleClickOpen}>
+        <button
+          style={{ marginLeft: 15 }}
+          onClick={handleClickOpen}
+          name="editButton"
+        >
           <EditIcon fontSize="inherit" />
         </button>
       </Tooltip>
@@ -581,8 +585,8 @@ export default function EditDialog({ data }: Props) {
           sx={{ width: "100%" }}
         >
           {dataType
-            ? "Expense deleted Successfully"
-            : "Revenue deleted Successfully"}
+            ? "Expense Edited Successfully"
+            : "Revenue Edited Successfully"}
         </Alert>
       </Snackbar>
       <Snackbar
