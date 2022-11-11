@@ -15,6 +15,10 @@ import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
+type Props = {
+  name: string;
+};
+
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
   ref
@@ -22,29 +26,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const changeDateFormat = (date: string) => {
-  const array = date.toString().split("-");
-  const months = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC",
-  ];
-  const monthFormat = parseInt(array[1]);
-  const finalString =
-    months[monthFormat - 1] + " " + array[2] + ", " + array[0];
-  return finalString;
-};
-
-export default function InputCapitalDialog() {
+export default function AddFundOrLoan({ name }: Props) {
   const [open, setOpen] = React.useState(false);
   const [dateValue, setDateValue] = React.useState(new Date());
   const [amount, setAmount] = React.useState(0);
@@ -69,12 +51,10 @@ export default function InputCapitalDialog() {
   };
 
   const handleSubmit = async () => {
-    let modifiedDate = changeDateFormat(
-      dateValue.toISOString().slice(0, 10).replace(/-/g, "-")
-    );
+    let modifiedDate = dateValue.toISOString().slice(0, 10).replace(/-/g, "-");
     const data = {
       capital: amount,
-      date: modifiedDate,
+      date: modifiedDate + "",
     };
     try {
       const result = await axios.post(
@@ -113,13 +93,11 @@ export default function InputCapitalDialog() {
           size="small"
           onClick={handleClickOpen}
         >
-          Input Starting Capital
+          {name}
         </Button>
       </Stack>
       <Dialog scroll="paper" open={open} onClose={handleClose}>
-        <DialogTitle sx={{ color: "black" }}>
-          Input Starting Capital
-        </DialogTitle>
+        <DialogTitle sx={{ color: "black" }}>{name} Amount</DialogTitle>
         <DialogContent dividers={true}>
           <Stack spacing={3}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -128,21 +106,16 @@ export default function InputCapitalDialog() {
                 inputFormat="MM/DD/YYYY"
                 value={dateValue}
                 onChange={handleDateChange}
-                maxDate={new Date()}
                 renderInput={(params: any) => (
                   <TextField {...params} name="transactionDate" />
                 )}
               />
             </LocalizationProvider>
             <TextField
-              required
               id="amount"
               name="amount"
               label="Amount"
               InputProps={{
-                inputProps: {
-                  min: 1,
-                },
                 startAdornment: (
                   <InputAdornment position="start">₹</InputAdornment>
                 ),

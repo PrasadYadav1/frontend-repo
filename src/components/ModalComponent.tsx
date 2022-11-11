@@ -36,6 +36,28 @@ type Props = {
   modalType: boolean;
 };
 
+const changeDateFormat = (date: string) => {
+  const array = date.toString().split("-");
+  const months = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
+  ];
+  const monthFormat = parseInt(array[1]);
+  const finalString =
+    months[monthFormat - 1] + " " + array[2] + ", " + array[0];
+  return finalString;
+};
+
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
   ref
@@ -51,7 +73,7 @@ const validationSchemaExpense = Yup.object({
   //   "Transaction Description is required"
   // ),
   recipient: Yup.string().required("Recipient is required"),
-  expenseType: Yup.string().required("Expense Type is required"),
+  // expenseType: Yup.string().required("Expense Type is required"),
   amount: Yup.number().integer().min(1).required("Amount is Required"),
   recurringExpense: Yup.string().required("Recurring Expense is Required"),
   repeatExpenseType: Yup.string().required("Repeat Expense Type is Required"),
@@ -69,7 +91,7 @@ const validationSchemaRevenue = Yup.object({
   //   "Transaction Description is required"
   // ),
   payer: Yup.string().required("Payer is required"),
-  revenueType: Yup.string().required("Revenue Type is required"),
+  // revenueType: Yup.string().required("Revenue Type is required"),
   amount: Yup.number().integer().min(1).required("Amount is Required"),
   recurringRevenue: Yup.string().required("Recurring Revenue is Required"),
   // repeatRevenueType: Yup.string().required("Repeat Revenue Type is Required"),
@@ -119,12 +141,10 @@ export default function TransitionsModal({ name, modalType }: Props) {
   const formikExpense = useFormik({
     initialValues: {
       transactionId: "",
-      transactionDate: value,
       debitChequeNo: "",
       transactionDescription: "",
       recipient: "",
       bankName: "",
-      expenseType: expenseType,
       amount: 0,
       recurringExpense: "No",
       repeatExpenseType: "Annually",
@@ -132,13 +152,12 @@ export default function TransitionsModal({ name, modalType }: Props) {
     },
     validationSchema: validationSchemaExpense,
     onSubmit: async (values: any, actions: any) => {
-      console.log("Submitted using ", clicked);
-      const selectedDate = values.transactionDate;
-      const month = selectedDate.getUTCMonth() + 1;
-      const day = selectedDate.getUTCDate();
-      const year = selectedDate.getUTCFullYear();
-      values.transactionDate = year + "-" + month + "-" + day;
+      const selectedDate = changeDateFormat(
+        value.toISOString().slice(0, 10).replace(/-/g, "-")
+      );
+      values.transactionDate = selectedDate;
       values.amount = parseInt(values.amount);
+      values.expenseType = expenseType;
       try {
         const result = await axios.post(
           "http://103.242.116.207:9000/expense/create",
@@ -173,12 +192,11 @@ export default function TransitionsModal({ name, modalType }: Props) {
   const formikRevenue = useFormik({
     initialValues: {
       transactionId: "",
-      transactionDate: value,
       creditChequeNo: "",
       transactionDescription: "",
       payer: "",
       bankName: "",
-      revenueType: revenueType,
+      // revenueType: revenueType,
       amount: 0,
       recurringRevenue: "No",
       repeatRevenueType: "Annually",
@@ -186,13 +204,12 @@ export default function TransitionsModal({ name, modalType }: Props) {
     },
     validationSchema: validationSchemaRevenue,
     onSubmit: async (values: any, actions: any) => {
-      const selectedDate = values.transactionDate;
-      const month = selectedDate.getUTCMonth() + 1;
-      const day = selectedDate.getUTCDate();
-      const year = selectedDate.getUTCFullYear();
+      const selectedDate = changeDateFormat(
+        value.toISOString().slice(0, 10).replace(/-/g, "-")
+      );
+      values.transactionDate = selectedDate;
+      values.amount = parseInt(values.amount);
       values.revenueType = revenueType;
-      values.transactionDate = year + "-" + month + "-" + day;
-      // values.amount = parseInt(values.amount);
       try {
         const result = await axios.post(
           "http://103.242.116.207:9000/revenue/create",
@@ -220,7 +237,6 @@ export default function TransitionsModal({ name, modalType }: Props) {
       } catch (err) {
         setAlertErrorOpen(true);
       }
-      console.log(values);
     },
   });
 
@@ -254,6 +270,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
                     inputFormat="MM/DD/YYYY"
                     value={value}
                     onChange={handleChange}
+                    maxDate={new Date()}
                     renderInput={(params: any) => (
                       <TextField {...params} name="transactionDate" />
                     )}
@@ -441,20 +458,6 @@ export default function TransitionsModal({ name, modalType }: Props) {
                       {...params}
                       label={modalType ? "Expense Type" : "Revenue Type"}
                       name={modalType ? "expenseType" : "revenueType"}
-                      error={
-                        modalType
-                          ? formikExpense.touched.expenseType &&
-                            Boolean(formikExpense.errors.expenseType)
-                          : formikRevenue.touched.revenueType &&
-                            Boolean(formikRevenue.errors.revenueType)
-                      }
-                      helperText={
-                        modalType
-                          ? formikExpense.touched.expenseType &&
-                            formikExpense.errors.expenseType
-                          : formikRevenue.touched.revenueType &&
-                            formikRevenue.errors.revenueType
-                      }
                     />
                   )}
                 />

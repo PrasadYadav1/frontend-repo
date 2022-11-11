@@ -34,9 +34,24 @@ export const expenseColumns = [
   },
   {
     id: 4,
+    field: "transactionId",
+    label: "Transaction ID",
+    width: "auto",
+    visible: false,
+  },
+  {
+    id: 5,
+    field: "transactionDescription",
+    label: "Transaction Description",
+    width: "auto",
+    visible: false,
+  },
+  {
+    id: 6,
     field: "actions",
     label: "Actions",
     width: "auto",
+    sortable: false,
     cellRenderer: ({
       tableManager,
       value,
@@ -50,19 +65,5 @@ export const expenseColumns = [
         <EditDialog data={data} />
       </>
     ),
-  },
-  {
-    id: 5,
-    field: "transactionId",
-    label: "Transaction ID",
-    width: "auto",
-    visible: false,
-  },
-  {
-    id: 6,
-    field: "transactionDescription",
-    label: "Transaction Description",
-    width: "auto",
-    visible: false,
   },
 ];

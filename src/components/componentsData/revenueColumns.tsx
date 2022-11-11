@@ -37,6 +37,7 @@ export const revenueColumns = [
     field: "actions",
     label: "Actions",
     width: "auto",
+    sortable: false,
     cellRenderer: ({
       tableManager,
       value,

@@ -22,6 +22,11 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
+import CashFlowPage from "./CashFlowPage";
+import Employees from "./Employees";
+import Dashboard from "./Dashboard";
+import Projects from "./Projects";
+import Budgeting from "./Budgeting";
 const drawerWidth = 240;
 
 function LandingPage() {
@@ -112,7 +117,13 @@ function LandingPage() {
           <Route path="/" element={<Home />} />
           <Route path="/orgchart" element={<Organization />} />
           <Route path="/leavemanagement" element={<LeaveManagement />} />
-          <Route path="/financemanagement" element={<FinanceManagement />} />
+          <Route path="financemanagement" element={<FinanceManagement />}>
+            <Route index path="dashboard" element={<Dashboard />} />
+            <Route path="cashflow" element={<CashFlowPage />} />
+            <Route path="employees" element={<Employees />} />
+            <Route index path="projects" element={<Projects />} />
+            <Route index path="budgeting" element={<Budgeting />} />
+          </Route>
           <Route
             path="/learningdevelopment"
             element={<LearningDevelopment />}

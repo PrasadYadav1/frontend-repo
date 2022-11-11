@@ -37,6 +37,12 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+const changeDateFormat = (date: string) => {
+  const array = date.toString().split("-");
+  const finalString = array[0].toUpperCase() + " " + array[1] + ", " + array[2];
+  return finalString;
+};
+
 export default function EditDialog({ data }: Props) {
   const [open, setOpen] = React.useState(false);
 
@@ -110,13 +116,16 @@ export default function EditDialog({ data }: Props) {
   };
 
   const handleDateChange = (newValue: any) => {
+    console.log(newValue);
     setDateValue(newValue);
   };
 
   const handleSubmit = async () => {
     let modifiedDate = dateValue;
     if (enableDate) {
-      modifiedDate = dateValue.toISOString().slice(0, 10).replace(/-/g, "-");
+      modifiedDate = changeDateFormat(
+        dateValue.$d.toString().slice(4, 15).replace(/ /g, "-")
+      );
     }
     const updatedData = dataType
       ? {
@@ -397,6 +406,7 @@ export default function EditDialog({ data }: Props) {
                 inputFormat="MM/DD/YYYY"
                 value={dateValue}
                 onChange={handleDateChange}
+                maxDate={new Date()}
                 renderInput={(params: any) => (
                   <TextField {...params} name="transactionDate" />
                 )}
