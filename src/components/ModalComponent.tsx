@@ -101,17 +101,17 @@ const validationSchemaRevenue = Yup.object({
   //   .required("Repeat Instance is Required"),
 });
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "90%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid blue",
-  boxShadow: 24,
-  p: 4,
-};
+// const style = {
+//   position: "absolute" as "absolute",
+//   top: "90%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid blue",
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 // function change_date(date: Date) {
 //   const month = date.getUTCMonth() + 1;
@@ -133,6 +133,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
   const [alertErrorOpen, setAlertErrorOpen] = React.useState(false);
   const [expenseType, setExpenseType] = React.useState(expenseTypes[0]);
   const [revenueType, setRevenueType] = React.useState(revenueTypes[0]);
+  const [error, setError] = React.useState("Oops! Some Error Occurred");
 
   function refreshPage() {
     window.location.reload();
@@ -183,6 +184,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
           setOpen(false);
         }
       } catch (err) {
+        setError("Try Adding Expense for the Dates in the Cashflow table.");
         setAlertErrorOpen(true);
       }
       console.log(values);
@@ -235,6 +237,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
           setOpen(false);
         }
       } catch (err) {
+        setError("Try Adding Revenue for the Dates in the Cashflow table.");
         setAlertErrorOpen(true);
       }
     },
@@ -270,7 +273,8 @@ export default function TransitionsModal({ name, modalType }: Props) {
                     inputFormat="MM/DD/YYYY"
                     value={value}
                     onChange={handleChange}
-                    maxDate={new Date()}
+                    disableFuture={true}
+                    // maxDate={new Date()}
                     renderInput={(params: any) => (
                       <TextField {...params} name="transactionDate" />
                     )}
@@ -621,7 +625,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
           severity="error"
           sx={{ width: "100%" }}
         >
-          Oops! Some Error Occurred
+          {error}
         </Alert>
       </Snackbar>
     </div>

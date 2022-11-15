@@ -14,6 +14,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import useFetch from "./useFetch";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -51,6 +52,10 @@ export default function InputCapitalDialog() {
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [alertErrorOpen, setAlertErrorOpen] = React.useState(false);
   const [error, setError] = React.useState("Oops! Some Error Occurred");
+  const [cashFlowData] = useFetch(
+    "http://103.242.116.207:9000/api/cash-flow/all"
+  );
+  console.log(cashFlowData);
 
   function refreshPage() {
     window.location.reload();
