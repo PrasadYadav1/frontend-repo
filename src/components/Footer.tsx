@@ -2,7 +2,7 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { Link } from "react-router-dom";
+import { Link } from "@material-ui/core";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -23,7 +23,7 @@ const Footer = () => {
           <Grid item mx={{ xs: 2, sm: 2 }}>
             <Link
               target="_blank"
-              to="https://www.linkedin.com/company/technoidentity-solutions-pvt-ltd/"
+              href="https://www.linkedin.com/company/technoidentity-solutions-pvt-ltd/"
             >
               <LinkedInIcon
                 style={{ color: "white" }}
@@ -35,7 +35,7 @@ const Footer = () => {
           <Grid item mx={{ xs: 2, sm: 2 }}>
             <Link
               target="_blank"
-              to="https://www.facebook.com/technoidentitysolution/"
+              href="https://www.facebook.com/technoidentitysolution/"
             >
               <FacebookIcon style={{ color: "white" }} fontSize="large" />
             </Link>
@@ -49,14 +49,14 @@ const Footer = () => {
         className="bg-footer"
       >
         <Container maxWidth={false}>
-          <Grid container spacing={8} color="yellow">
+          <Grid container spacing={8}>
             <Grid item xs={12} sm={4}>
               <Box borderBottom={4} alignSelf="center">
                 Help
               </Box>
               <Box>
                 <Link
-                  to="#"
+                  href="#"
                   style={{ textDecoration: "none" }}
                   className="links-footer"
                 >
@@ -65,7 +65,7 @@ const Footer = () => {
               </Box>
               <Box>
                 <Link
-                  to="#"
+                  href="#"
                   style={{ textDecoration: "none" }}
                   className="links-footer"
                 >
@@ -74,7 +74,7 @@ const Footer = () => {
               </Box>
               <Box>
                 <Link
-                  to="#"
+                  href="#"
                   style={{ textDecoration: "none" }}
                   className="links-footer"
                 >
@@ -90,7 +90,7 @@ const Footer = () => {
               </Box>
               <Box>
                 <Link
-                  to="/login"
+                  href="/login"
                   style={{ textDecoration: "none" }}
                   className="links-footer"
                 >
@@ -99,7 +99,7 @@ const Footer = () => {
               </Box>
               <Box>
                 <Link
-                  to="/signup"
+                  href="/signup"
                   style={{ textDecoration: "none" }}
                   className="links-footer"
                 >
@@ -118,7 +118,7 @@ const Footer = () => {
               <Box borderBottom={4}>Messages</Box>
               <Box>
                 <Link
-                  to="#"
+                  href="#"
                   style={{ textDecoration: "none" }}
                   className="links-footer"
                 >
@@ -127,7 +127,7 @@ const Footer = () => {
               </Box>
               <Box>
                 <Link
-                  to="#"
+                  href="#"
                   style={{ textDecoration: "none" }}
                   className="links-footer"
                 >
@@ -136,7 +136,7 @@ const Footer = () => {
               </Box>
               <Box>
                 <Link
-                  to="#"
+                  href="#"
                   style={{ textDecoration: "none" }}
                   className="links-footer"
                 >

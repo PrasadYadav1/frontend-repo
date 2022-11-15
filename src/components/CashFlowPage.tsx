@@ -1,12 +1,16 @@
-
+import React from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Unstable_Grid2";
+import useFetch from "./useFetch";
+import ReactTable from "./ReactTable";
 import Stack from "@mui/material/Stack";
-import { Outlet } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TransitionsModal from "./ModalComponent";
 import { cashFlowColumns } from "./componentsData/cashFlowColumns";
 import { expenseColumns } from "./componentsData/expenseColumns";
 import { revenueColumns } from "./componentsData/revenueColumns";
-import FinanceIcons from './FinanceIcons';
+import InputCapitalDialog from "./InputCapitalDialog";
+import AddFundOrLoan from "./AddFundOrLoan";
 
 // const columnsData = (rows: any) => {
 //   const columns: any = [];
@@ -27,26 +31,28 @@ import FinanceIcons from './FinanceIcons';
 //   return columns;
 // };
 
-
-function FinanceManagement() {
+export default function CashFlowPage() {
+  const [cashFlowRows] = useFetch(
+    "http://103.242.116.207:9000/api/cash-flow/all"
+  );
+  // const cashFlowColumns = columnsData(cashFlowRows);
+  const [expenseRows] = useFetch("http://103.242.116.207:9000/expense/all");
+  // const expenseColumns = columnsData(expenseRows);
+  const [revenueRows] = useFetch("http://103.242.116.207:9000/revenue/all");
+  // const revenueColumns = columnsData(revenueRows);
   return (
     <>
-      <Stack spacing={2}>
-        <div>
-          <FinanceIcons />
+      <div style={{ display: "inline-block", width: "100%" }}>
+        <h4 style={{ float: "left", fontSize: "15px" }}>Cash Flow Table</h4>
+        <div style={{ float: "right" }}>
+          <Stack spacing={2} direction="row">
+            <InputCapitalDialog />
+            <AddFundOrLoan name={"Add Loan"} />
+            <AddFundOrLoan name={"Add Funding"} />
+          </Stack>
         </div>
-        <div style={{ marginTop: "100px" }}>
-          <Outlet />
-        </div>
-      </Stack>
-    </>
-  );
-}
-
-export default FinanceManagement;
-
-      
-      {/* <ReactTable rows={cashFlowRows} columns={cashFlowColumns} />
+      </div>
+      <ReactTable rows={cashFlowRows} columns={cashFlowColumns} />
       <Box sx={{ flexGrow: 1, mt: "50px" }}>
         <Grid
           container
@@ -54,6 +60,11 @@ export default FinanceManagement;
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           <Grid xs={12} sm={12} md={6} lg={6}>
+            <div style={{ textAlign: "center" }}>
+              <h4 style={{ verticalAlign: "middle", fontSize: "15px" }}>
+                Expense Table
+              </h4>
+            </div>
             <ReactTable rows={expenseRows} columns={expenseColumns} />
             <Grid>
               <Stack direction="row" alignItems="center" spacing={6} mt={2}>
@@ -62,10 +73,16 @@ export default FinanceManagement;
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
                 <TransitionsModal name={"Add Expense"} modalType={true} />
+                {/* <ScrollDialog name={"Add Expense"} modalType={true} /> */}
               </Stack>
             </Grid>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={6}>
+            <div style={{ textAlign: "center" }}>
+              <h4 style={{ verticalAlign: "middle", fontSize: "15px" }}>
+                Revenue Table
+              </h4>
+            </div>
             <ReactTable rows={revenueRows} columns={revenueColumns} />
             <Grid>
               <Stack direction="row" alignItems="center" spacing={6} mt={2}>
@@ -78,6 +95,7 @@ export default FinanceManagement;
             </Grid>
           </Grid>
         </Grid>
-      </Box> */}
-   
-
+      </Box>
+    </>
+  );
+}

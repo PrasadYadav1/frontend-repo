@@ -20,6 +20,13 @@ import SignUp from "./components/Signup";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 
+import Tasks from "./components/Tasks";
+import CashFlowPage from "./components/CashFlowPage";
+import Employees from "./components/Employees";
+import Dashboard from "./components/Dashboard";
+import Projects from "./components/Projects";
+import Budgeting from "./components/Budgeting";
+
 function App() {
   return (
     <BrowserRouter>
@@ -49,15 +56,25 @@ function App() {
         >
           <Route index path="home" element={<Home />} />
           <Route path="orgchart" element={<Organizations />} />
-          <Route path="financemanagement" element={<FinanceManagement />} />
+          <Route path="financemanagement" element={<FinanceManagement />}>
+            <Route index path="dashboard" element={<Dashboard />} />
+            <Route path="cashflow" element={<CashFlowPage />} />
+            <Route path="employees" element={<Employees />} />
+            <Route index path="projects" element={<Projects />} />
+            <Route index path="budgeting" element={<Budgeting />} />
+          </Route>
           <Route path="leavemanagement" element={<LeaveManagement />} />
           <Route path="learningdevelopment" element={<LearningDevelopment />} />
+<<<<<<< HEAD
           <Route path="wurkspace" element={<WurkSpace />} >
             
               <Route path="awards" element={<Awards />}/>
               <Route path="meet" element={<Meet />}/>
               <Route path="connectU" element={<ConnectU />}/>
           </Route>
+=======
+          <Route path="tasks" element={<Tasks />} />
+>>>>>>> main
         </Route>
 
         <Route path="*" element={<NotFound />} />

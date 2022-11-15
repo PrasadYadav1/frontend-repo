@@ -10,7 +10,8 @@
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.9",
     "@mui/styled-engine-sc": "^5.10.6",
-    "@mui/x-date-pickers": "^5.0.5",
+    "@mui/styles": "^5.10.10",
+    "@mui/x-date-pickers": "^5.0.6",
     "@nadavshaar/react-grid-table": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -20,9 +21,9 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "axios": "^1.1.3",
-    "bcrypt": "^5.1.0",
-    "dayjs": "^1.11.6",
+    "bcryptjs": "^2.4.3",
     "formik": "^2.2.9",
+    "multiselect-react-dropdown": "^2.0.25",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
@@ -35,7 +36,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

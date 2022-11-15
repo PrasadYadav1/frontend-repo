@@ -16,10 +16,15 @@
 
 .links-footer
 {
-    color: white
-   
+    color: rgb(21, 19, 19);
 }
+
 .links-footer:hover
 {
-    color: rgb(122, 118, 118);
+    font-weight: 600;
+}
+
+.links-footer:visited
+{
+    color: black;
 }
