@@ -1,6 +1,6 @@
 export const revenueTypes = [
-  { label: "Consulting-Revenue" },
-  { label: "Service-Revenue" },
-  { label: "Delivery-Revenue" },
-  { label: "Other-Revenue" },
+  "Consulting-Revenue",
+  "Service-Revenue",
+  "Delivery-Revenue",
+  "Other-Revenue",
 ];
