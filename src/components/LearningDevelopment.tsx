@@ -1,7 +1,7 @@
 import React from "react";
 
 function LearningDevelopment() {
-  return <h1>LearningDevelopment</h1>;
+  return <h1>Learning Development</h1>;
 }
 
 export default LearningDevelopment;

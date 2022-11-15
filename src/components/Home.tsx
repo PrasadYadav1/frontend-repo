@@ -18,11 +18,6 @@ function Home() {
   const [firstName, setFirstName] = useState("");
 
   const navigate = useNavigate();
-  const Logout = () => {
-    window.localStorage.removeItem("isLoggedIn");
-    window.localStorage.removeItem("token");
-    navigate("/login");
-  };
 
   // update use api call
   const Update = () => {
@@ -70,13 +65,6 @@ function Home() {
               Update Data
             </Button>{" "} */}
             <br />
-            <Button
-              sx={{ marginLeft: "5px", width: "100px" }}
-              variant="contained"
-              onClick={Logout}
-            >
-              Logout
-            </Button>
           </div>
         </Grid>
       </Box>

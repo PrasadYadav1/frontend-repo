@@ -9,8 +9,9 @@ import Toolbar from "@mui/material/Toolbar";
 import { NavBarData } from "./NavbarData";
 import Home from "./Home";
 import Organization from "./Organization";
+import { Routes, useNavigate } from "react-router-dom";
 import LeaveManagement from "./LeaveManagement";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Route, useLocation } from "react-router-dom";
 import FinanceManagement from "./FinanceManagement";
 import LearningDevelopment from "./LearningDevelopment";
 import { Link } from "react-router-dom";
@@ -21,7 +22,6 @@ import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCale
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
-import { useNavigate } from "react-router-dom";
 
 import Tasks from "./Tasks";
 import CashFlowPage from "./CashFlowPage";
@@ -29,10 +29,19 @@ import Employees from "./Employees";
 import Dashboard from "./Dashboard";
 import Projects from "./Projects";
 import Budgeting from "./Budgeting";
+import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 
 function LandingPage() {
+  const navigate = useNavigate();
+
+  const Logout = () => {
+    window.localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   const { pathname } = useLocation();
   const drawer = (
     <div className="nav">
@@ -78,6 +87,13 @@ function LandingPage() {
             <Tooltip title="Help" arrow>
               <QuizOutlinedIcon />
             </Tooltip>
+            <Button
+              sx={{ marginLeft: "10px", width: "80px", fontSize: "12px" }}
+              variant="contained"
+              onClick={Logout}
+            >
+              Logout
+            </Button>
           </Stack>
           <SideNavPopup />
         </Toolbar>
