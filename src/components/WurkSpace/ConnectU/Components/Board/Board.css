@@ -1,0 +1,94 @@
+.board {
+  min-width: 10px;
+  width: 215px;
+  height: 100%;
+  overflow-y: auto;
+  flex-basis: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  color: #040607;
+}
+.app-boards {
+  gap: 2px !important;
+}
+.board-inner {
+  background-color: rgba(147, 177, 201, 0.55);
+  /* padding: 1px; */
+  border-radius: 3px;
+}
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.board-header-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 5px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+/* 
+.board-header-title span {
+  color: rgb(145, 145, 145);
+} */
+
+.board-header-title-more {
+  cursor: pointer;
+  position: relative;
+  margin-right: 10px;
+}
+
+.board-dropdown {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  padding: 5px;
+  /* width: 5px !important; */
+  margin-right: 20px;
+  border-radius: 20px;
+  cursor: default;
+}
+.board-dropdown p {
+  border-bottom: 1px solid #f8f8f8;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 12px;
+}
+
+.board-cards {
+  background-color: #f8f8f8;
+  padding: 8px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+}
+
+.board-add-card {
+  background-color: rgba(147, 177, 201, 0.55);
+  color: #000;
+  border-radius: 30px;
+  box-shadow: 0px 1px 0 1px rgba(0, 0, 0, 0.12);
+  width: 25px;
+  padding: 0px;
+  margin-left: 100px;
+  height: 25px;
+  text-align: center;
+  margin-top: 2px;
+}
+.board-add-card-edit {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+}
+.custom-input-edit-footer .closeIcon {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+}

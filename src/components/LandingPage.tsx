@@ -12,6 +12,10 @@ import Organization from "./Organization";
 import LeaveManagement from "./LeaveManagement";
 import { Routes, Route, useLocation } from "react-router-dom";
 import FinanceManagement from "./FinanceManagement";
+import WurkSpace from "./WurkSpace/WurkSpace";
+import Awards from "./WurkSpace/Awards/Awards";
+import Meet from "./WurkSpace/Meet/Meet";
+import ConnectU from "./WurkSpace/ConnectU/ConnectU";
 import LearningDevelopment from "./LearningDevelopment";
 import { Link } from "react-router-dom";
 import SideNavPopup from "./SidenavPopup";
@@ -22,7 +26,7 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
-const drawerWidth = 240;
+const drawerWidth = 90;
 
 function LandingPage() {
   const { pathname } = useLocation();
@@ -55,7 +59,7 @@ function LandingPage() {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: "#f98b81",
+          backgroundColor: "#e26958",
           flexDirection: "row-reverse",
         }}
       >
@@ -88,10 +92,11 @@ function LandingPage() {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              background:
-                "linear-gradient(-45deg, #f994a9, #f0755d, #da6353, #fef3f2)",
-              backgroundSize: "400% 400%",
-              animation: "gradient 15s ease infinite;",
+              background:"#e26958",
+              // background:
+              //   "linear-gradient(-45deg, #f994a9, #f0755d, #da6353, #fef3f2)",
+              // backgroundSize: "400% 400%",
+              // animation: "gradient 15s ease infinite;",
             },
           }}
           open
@@ -117,6 +122,14 @@ function LandingPage() {
             path="/learningdevelopment"
             element={<LearningDevelopment />}
           />
+          <Route
+            path="/wurkspace"
+            element={<WurkSpace />}>
+              <Route path="awards" element={<Awards />}/>
+              <Route path="meet" element={<Meet />}/>
+              <Route path="connectU" element={<ConnectU />}/>
+            </Route>
+          
         </Routes>
       </Box>
     </Box>

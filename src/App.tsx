@@ -9,6 +9,10 @@ import Organizations from "./components/Organization";
 import Home from "./components/Home";
 import FinanceManagement from "./components/FinanceManagement";
 import LeaveManagement from "./components/LeaveManagement";
+import WurkSpace from "./components/WurkSpace/WurkSpace";
+import Awards from "./components/WurkSpace/Awards/Awards";
+import Meet from "./components/WurkSpace/Meet/Meet";
+import ConnectU from "./components/WurkSpace/ConnectU/ConnectU";
 import LearningDevelopment from "./components/LearningDevelopment";
 import NotFound from "./components/NotFound";
 import Protected from "./components/Protected";
@@ -48,6 +52,12 @@ function App() {
           <Route path="financemanagement" element={<FinanceManagement />} />
           <Route path="leavemanagement" element={<LeaveManagement />} />
           <Route path="learningdevelopment" element={<LearningDevelopment />} />
+          <Route path="wurkspace" element={<WurkSpace />} >
+            
+              <Route path="awards" element={<Awards />}/>
+              <Route path="meet" element={<Meet />}/>
+              <Route path="connectU" element={<ConnectU />}/>
+          </Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />

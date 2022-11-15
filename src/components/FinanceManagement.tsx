@@ -8,6 +8,7 @@ import TransitionsModal from "./ModalComponent";
 import { cashFlowColumns } from "./componentsData/cashFlowColumns";
 import { expenseColumns } from "./componentsData/expenseColumns";
 import { revenueColumns } from "./componentsData/revenueColumns";
+import FinanceIcons from './FinanceIcons';
 
 // const columnsData = (rows: any) => {
 //   const columns: any = [];
@@ -29,18 +30,24 @@ import { revenueColumns } from "./componentsData/revenueColumns";
 // };
 
 function FinanceManagement() {
-  const [cashFlowRows] = useFetch(
-    "http://103.242.116.207:9000/api/cash-flow/all"
-  );
+//   const [cashFlowRows] = useFetch(
+//     "http://103.242.116.207:9000/api/cash-flow/all"
+//   );
   // const cashFlowColumns = columnsData(cashFlowRows);
-  const [expenseRows] = useFetch("http://103.242.116.207:9000/expense/all");
+  // const [expenseRows] = useFetch("http://103.242.116.207:9000/expense/all");
   // const expenseColumns = columnsData(expenseRows);
-  const [revenueRows] = useFetch("http://103.242.116.207:9000/revenue/all");
+  // const [revenueRows] = useFetch("http://103.242.116.207:9000/revenue/all");
   // const revenueColumns = columnsData(revenueRows);
   return (
     <>
-      <h1>Finance Management page</h1>
-      <ReactTable rows={cashFlowRows} columns={cashFlowColumns} />
+      <FinanceIcons/>
+      </>
+  );
+}
+
+export default FinanceManagement;
+      
+      {/* <ReactTable rows={cashFlowRows} columns={cashFlowColumns} />
       <Box sx={{ flexGrow: 1, mt: "50px" }}>
         <Grid
           container
@@ -72,9 +79,5 @@ function FinanceManagement() {
             </Grid>
           </Grid>
         </Grid>
-      </Box>
-    </>
-  );
-}
-
-export default FinanceManagement;
+      </Box> */}
+   
