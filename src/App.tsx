@@ -65,16 +65,14 @@ function App() {
           </Route>
           <Route path="leavemanagement" element={<LeaveManagement />} />
           <Route path="learningdevelopment" element={<LearningDevelopment />} />
-<<<<<<< HEAD
-          <Route path="wurkspace" element={<WurkSpace />} >
-            
-              <Route path="awards" element={<Awards />}/>
-              <Route path="meet" element={<Meet />}/>
-              <Route path="connectU" element={<ConnectU />}/>
+
+          <Route path="wurkspace" element={<WurkSpace />}>
+            <Route path="awards" element={<Awards />} />
+            <Route path="meet" element={<Meet />} />
+            <Route path="connectU" element={<ConnectU />} />
           </Route>
-=======
+
           <Route path="tasks" element={<Tasks />} />
->>>>>>> main
         </Route>
 
         <Route path="*" element={<NotFound />} />

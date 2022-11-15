@@ -26,10 +26,6 @@ import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCale
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
-
-const drawerWidth = 90;
-
-
 import Tasks from "./Tasks";
 import CashFlowPage from "./CashFlowPage";
 import Employees from "./Employees";
@@ -38,7 +34,7 @@ import Projects from "./Projects";
 import Budgeting from "./Budgeting";
 import { Button } from "@mui/material";
 
-
+const drawerWidth = 130;
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -125,10 +121,9 @@ function LandingPage() {
               // backgroundSize: "400% 400%",
               // animation: "gradient 15s ease infinite;",
 
-              background: "#4D51E6",
+              background: "#e26958",
               backgroundSize: "400% 400%",
               animation: "gradient 15s ease infinite;",
-
             },
           }}
           open
@@ -161,14 +156,11 @@ function LandingPage() {
             element={<LearningDevelopment />}
           />
 
-          <Route
-            path="/wurkspace"
-            element={<WurkSpace />}>
-              <Route path="awards" element={<Awards />}/>
-              <Route path="meet" element={<Meet />}/>
-              <Route path="connectU" element={<ConnectU />}/>
-            </Route>
-          
+          <Route path="/wurkspace" element={<WurkSpace />}>
+            <Route path="awards" element={<Awards />} />
+            <Route path="meet" element={<Meet />} />
+            <Route path="connectU" element={<ConnectU />} />
+          </Route>
 
           <Route path="/tasks" element={<Tasks />} />
         </Routes>
