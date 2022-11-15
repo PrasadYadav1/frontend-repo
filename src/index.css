@@ -63,9 +63,57 @@ ul li svg {
 
 .rgt-cell-header-inner {
   background-color: #e2bef1 !important;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 12px;
 }
 
 .rgt-wrapper {
-  height: 40% !important;
+  height: 20% !important;
+}
+
+.rgt-cell {
+  font-size: 12px;
+  min-height: 48px !important;
+}
+
+/* .rgt-container {
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px auto max-content !important;
+} */
+
+.rgt-header-container {
+  height: 40px;
+}
+
+.rgt-footer {
+  height: 40px;
+  font-size: 12px;
+}
+
+.rgt-search-label {
+  font-size: 12px !important;
+}
+
+.rgt-footer-page-size-select {
+  font-size: 12px !important;
+}
+
+.rgt-search-input {
+  font-size: 12px !important;
+}
+
+/* @media screen and (max-width: 599px) {
+  .rgt-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+} */
+
+/* :root {
+  --colNum: 8;
+}
+.rgt-container {
+  grid-template-columns: repeat(var(--colNum), minmax(0, 1fr)) auto !important;
+} */
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  border: 2px solid blue;
 }
