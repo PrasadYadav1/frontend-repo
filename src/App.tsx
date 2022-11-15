@@ -15,6 +15,8 @@ import Protected from "./components/Protected";
 import SignUp from "./components/Signup";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+
+import Tasks from "./components/Tasks";
 import CashFlowPage from "./components/CashFlowPage";
 import Employees from "./components/Employees";
 import Dashboard from "./components/Dashboard";
@@ -59,6 +61,7 @@ function App() {
           </Route>
           <Route path="leavemanagement" element={<LeaveManagement />} />
           <Route path="learningdevelopment" element={<LearningDevelopment />} />
+          <Route path="tasks" element={<Tasks />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

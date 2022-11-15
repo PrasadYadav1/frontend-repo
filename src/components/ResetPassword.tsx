@@ -210,7 +210,7 @@ const ResetPassword = () => {
               <Grid
                 container
                 spacing={2}
-                columns={{ xs: 3, sm: 6 }}
+                columns={{ sm: 3, md: 8 }}
                 justifyContent="center"
               >
                 <Grid item xs={4}>
