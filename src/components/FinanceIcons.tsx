@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Grid, Card, CardContent, Typography } from "@mui/material";
 import { FinanceIconsData } from "./componentsData/FinanceIconsData";
@@ -22,12 +23,15 @@ export default function FinanceIcons() {
                 <CardContent>
                   <Typography sx={{ height: 20 }}>{data.icon}</Typography>
 
+
                   <Typography
                     sx={{ fontSize: 12 }}
                     color="text.secondary"
                     fontWeight="bold"
                     textAlign="center"
+
                     marginTop="40px"
+
                     gutterBottom
                   >
                     {data.name}
@@ -38,6 +42,10 @@ export default function FinanceIcons() {
           </Link>
         ))}
       </Grid>
+
+     
     </div>
   );
 }
+
+   

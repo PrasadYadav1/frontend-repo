@@ -1,4 +1,4 @@
-@keyframes gradient {
+/* @keyframes gradient {
   0% {
     background-position: 0% 50%;
   }
@@ -8,32 +8,33 @@
   100% {
     background-position: 0% 50%;
   }
-}
+} */
 
 .nav ul {
-  margin-top: 100px;
-  position: relative;
-  text-align: left;
+  /* margin-top: 20px; */
+  /* position: relative; */
+  /* text-align: left; */
   list-style: none;
-  font-size: 13px;
+  font-size: 10px;
   font-family: Helvetica, Arial, sans-serif;
-  line-height: 2em;
+  /* line-height: 2em; */
   transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   cursor: pointer;
 }
 
 .nav ul li a {
   display: flex;
+  flex-direction: column;
   text-decoration: none;
   margin-bottom: 7px;
   font-size: 16x;
-  color: rgb(194, 184, 184);
+  color: rgb(212, 207, 207);
   font-weight: 400;
   transition: all 0.3s ease 0s;
-  margin-left: 25px;
+  margin-left: 9px;
 }
 .nav ul li svg {
-  margin-right: 10px;
+  margin-left: 20px;
 }
 
 nav ul li a:hover,
@@ -44,17 +45,13 @@ nav ul li svg:hover {
 ul li a {
   display: flex;
   text-decoration: none;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   font-size: 16x;
   color: rgb(194, 184, 184);
   font-weight: 400;
   transition: all 0.3s ease 0s;
-  margin-left: 25px;
-  padding-bottom: 10px;
-}
-
-ul li svg {
-  margin-right: 10px;
+  margin-left: 10px;
+  padding-bottom: 15px;
 }
 
 .rgt-cell:not(.rgt-row-edit):not(.rgt-row-not-selectable) {

@@ -13,6 +13,10 @@ import { Routes, useNavigate } from "react-router-dom";
 import LeaveManagement from "./LeaveManagement";
 import { Route, useLocation } from "react-router-dom";
 import FinanceManagement from "./FinanceManagement";
+import WurkSpace from "./WurkSpace/WurkSpace";
+import Awards from "./WurkSpace/Awards/Awards";
+import Meet from "./WurkSpace/Meet/Meet";
+import ConnectU from "./WurkSpace/ConnectU/ConnectU";
 import LearningDevelopment from "./LearningDevelopment";
 import { Link } from "react-router-dom";
 import SideNavPopup from "./SidenavPopup";
@@ -23,6 +27,9 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 
+const drawerWidth = 90;
+
+
 import Tasks from "./Tasks";
 import CashFlowPage from "./CashFlowPage";
 import Employees from "./Employees";
@@ -31,7 +38,7 @@ import Projects from "./Projects";
 import Budgeting from "./Budgeting";
 import { Button } from "@mui/material";
 
-const drawerWidth = 240;
+
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -72,7 +79,7 @@ function LandingPage() {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: "#222",
+          backgroundColor: "#e26958",
           flexDirection: "row-reverse",
         }}
       >
@@ -112,9 +119,16 @@ function LandingPage() {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+
+              // background:
+              //   "linear-gradient(-45deg, #f994a9, #f0755d, #da6353, #fef3f2)",
+              // backgroundSize: "400% 400%",
+              // animation: "gradient 15s ease infinite;",
+
               background: "#4D51E6",
               backgroundSize: "400% 400%",
               animation: "gradient 15s ease infinite;",
+
             },
           }}
           open
@@ -146,6 +160,16 @@ function LandingPage() {
             path="/learningdevelopment"
             element={<LearningDevelopment />}
           />
+
+          <Route
+            path="/wurkspace"
+            element={<WurkSpace />}>
+              <Route path="awards" element={<Awards />}/>
+              <Route path="meet" element={<Meet />}/>
+              <Route path="connectU" element={<ConnectU />}/>
+            </Route>
+          
+
           <Route path="/tasks" element={<Tasks />} />
         </Routes>
       </Box>
