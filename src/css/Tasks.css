@@ -1,0 +1,38 @@
+body
+{
+    background-color: rgb(237, 237, 237);
+}
+
+.task-container
+{
+    /* background-color: rgb(77, 116, 212); */
+}
+
+.card-content
+{
+    background-color: #659ee0;
+}
+
+.task-list
+{
+    font-size: "22px";
+    background-color:  white;
+    color: black;
+    width: "220px";
+    margin-bottom : "10px";       
+}
+
+.task-list:hover
+{
+    background-color: #DFDFDF;
+    color: black;
+}
+
+
+
+/* modal css */
+
+.multi-select-members
+{
+  font-size: 15px;
+}

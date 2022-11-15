@@ -15,6 +15,7 @@ import Protected from "./components/Protected";
 import SignUp from "./components/Signup";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import Tasks from "./components/Tasks";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path="financemanagement" element={<FinanceManagement />} />
           <Route path="leavemanagement" element={<LeaveManagement />} />
           <Route path="learningdevelopment" element={<LearningDevelopment />} />
+          <Route path="tasks" element={<Tasks />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

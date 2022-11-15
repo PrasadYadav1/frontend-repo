@@ -1,11 +1,12 @@
 import axios from "../api/axios";
 const LOGIN_URL = "sign-in";
 const REGISTER_URL = "sign-up";
+
 // for encryption
-// const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 // // SALT should be created ONE TIME upon sign up
-// const salt = bcrypt.genSaltSync(10);
-// const salt1 = bcrypt.genSaltSync(12);
+const salt = bcrypt.genSaltSync(10);
+const salt1 = bcrypt.genSaltSync(12);
 
 // parsing jwt token
 const parseJwt = (token: string) => {
@@ -14,6 +15,31 @@ const parseJwt = (token: string) => {
   } catch (e) {
     return null;
   }
+};
+
+// login code
+const login = (email: string, password: string) => {
+  // password = bcrypt.hashSync(password, salt);
+
+  return axios
+    .post(
+      LOGIN_URL,
+      // loginFormData,
+      JSON.stringify({ email: email, password: password }),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      if (response.data?.token) {
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userId", JSON.stringify(response.data.user.id));
+      }
+
+      return response.data;
+    });
 };
 
 // register code
@@ -65,8 +91,14 @@ const register = (
     });
 };
 
-// reset password
+// logout
+const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("userId");
+};
 
+// reset password
 const reset = (password: string, confirmPassword: string) => {
   return axios
     .post(
@@ -87,37 +119,6 @@ const reset = (password: string, confirmPassword: string) => {
 
       return response.data;
     });
-};
-
-// login code
-const login = (email: string, password: string) => {
-  // password = bcrypt.hashSync(password, salt);
-
-  return axios
-    .post(
-      LOGIN_URL,
-      // loginFormData,
-      JSON.stringify({ email: email, password: password }),
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      }
-    )
-    .then((response) => {
-      if (response.data?.token) {
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userId", JSON.stringify(response.data.user.id));
-      }
-
-      return response.data;
-    });
-};
-
-const logout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("isLoggedIn");
-  localStorage.removeItem("userId");
 };
 
 const getCurrentUser = () => {

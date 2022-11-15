@@ -3,6 +3,7 @@ import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
+import TaskIcon from "@mui/icons-material/Task";
 
 export const NavBarData = [
   {
@@ -29,5 +30,10 @@ export const NavBarData = [
     title: "Learning & Development",
     path: "/landingpage/learningdevelopment",
     icon: <CastForEducationIcon />,
+  },
+  {
+    title: "Task Master",
+    path: "/landingpage/tasks",
+    icon: <TaskIcon />,
   },
 ];

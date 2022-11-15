@@ -22,6 +22,8 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
+import Tasks from "./Tasks";
+
 const drawerWidth = 240;
 
 function LandingPage() {
@@ -55,7 +57,7 @@ function LandingPage() {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: "#f98b81",
+          backgroundColor: "#222",
           flexDirection: "row-reverse",
         }}
       >
@@ -88,8 +90,7 @@ function LandingPage() {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              background:
-                "linear-gradient(-45deg, #f994a9, #f0755d, #da6353, #fef3f2)",
+              background: "#4D51E6",
               backgroundSize: "400% 400%",
               animation: "gradient 15s ease infinite;",
             },
@@ -117,6 +118,7 @@ function LandingPage() {
             path="/learningdevelopment"
             element={<LearningDevelopment />}
           />
+          <Route path="/tasks" element={<Tasks />} />
         </Routes>
       </Box>
     </Box>
