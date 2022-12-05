@@ -64,7 +64,13 @@ const SignUp = () => {
     firstName: Yup.string().required("Required"),
     middleName: Yup.string(),
     lastName: Yup.string().required("Required"),
-    email: Yup.string().email("Invalid email.").required("Required"),
+    email: Yup.string()
+      .email("Invalid email.")
+      .required("Required")
+      .matches(
+        /^[A-Za-z0-9._%+-]+@technoidentity\.com$/,
+        "Enter your company provided email"
+      ),
     primaryMobile: Yup.string()
       .required("Required")
       .matches(/^[6-9]\d{9}$/, "Phone number is not valid"),
