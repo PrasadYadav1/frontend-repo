@@ -14,6 +14,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { InputLabel, MenuItem, Select } from "@mui/material";
 
 type Props = {
   name: string;
@@ -26,10 +27,28 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function AddFundOrLoan({ name }: Props) {
+export default function AddAdjustment({ name }: Props) {
+  const getInitialRepayFlag = () => {
+    const repayFlag = "No";
+    return repayFlag;
+  };
+  const getInitialRepayType = () => {
+    const repayType = "Not Selected";
+    return repayType;
+  };
+  const getInitialAdjustmentType = () => {
+    const adjustmentType = "Not Selected";
+    return adjustmentType;
+  };
+
   const [open, setOpen] = React.useState(false);
   const [dateValue, setDateValue] = React.useState(new Date());
   const [amount, setAmount] = React.useState(0);
+  const [schedule, setSchedule] = React.useState(0);
+  const [source, setSources] = React.useState("");
+  const [repayFlag, setRepayFlag] = React.useState(getInitialRepayFlag);
+  const [repayType, setRepayType] = React.useState(getInitialRepayType);
+  const [adjustmentType, setAdjustmentType] = React.useState(getInitialAdjustmentType);
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [alertErrorOpen, setAlertErrorOpen] = React.useState(false);
   const [error, setError] = React.useState("Oops! Some Error Occurred");
@@ -49,31 +68,46 @@ export default function AddFundOrLoan({ name }: Props) {
   const handleDateChange = (newValue: any) => {
     setDateValue(newValue);
   };
+ 
+  const handleRepayFlagChange = (e:any) => {
+    setRepayFlag(e.target.value);
+  };
+
+  const handleRepayTypeChange = (e:any) => {
+    setRepayType(e.target.value);
+  };
+
+  const handleAdjustmentTypeChange = (e:any) => {
+    setAdjustmentType(e.target.value);
+  };
 
   const handleSubmit = async () => {
-    let modifiedDate = dateValue.toISOString().slice(0, 10).replace(/-/g, "-");
+    let modifiedDate = dateValue.toISOString();
     const data = {
-      capital: amount,
-      date: modifiedDate + "",
+      amount: amount,
+      transactionDate: modifiedDate + "",
+      adjustmentType: adjustmentType,
+      source: source,
+      repayRequired: repayFlag,
+      schedule: schedule,
+      repayType:repayType
     };
     try {
-      const result = await axios.post(
-        "http://103.242.116.207:9000/api/cash-flow/first-create",
-        data,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-
-      if (result.status === 200) {
+      fetch("http://103.242.116.207:9000/adjustment/create",{
+        method:'POST',
+        headers:{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body:JSON.stringify(data)
+      }).then((result) =>{
+        if (result.status === 200) {
         setAlertOpen(true);
         setOpen(false);
-        setTimeout(() => refreshPage(), 2000);
       } else {
         setAlertErrorOpen(true);
         setOpen(false);
-      }
+      }})
     } catch (err: any) {
       const errorString = err.response.data;
       setError(
@@ -96,7 +130,7 @@ export default function AddFundOrLoan({ name }: Props) {
           {name}
         </Button>
       </Stack>
-      <Dialog scroll="paper" open={open} onClose={handleClose}>
+      {open && <Dialog scroll="paper" open={open} onClose={handleClose}>
         <DialogTitle sx={{ color: "black" }}>{name} Amount</DialogTitle>
         <DialogContent dividers={true}>
           <Stack spacing={3}>
@@ -125,20 +159,63 @@ export default function AddFundOrLoan({ name }: Props) {
                 setAmount(e.target.value === "" ? 0 : parseInt(e.target.value))
               }
             />
-            <h4 style={{ color: "red" }}>
-              *Starting Capital to be updated only during the launch of
-              business/capital
-            </h4>
+            <TextField
+              id="schedule"
+              name="schedule"
+              label="Schedule"
+              value={schedule}
+              onChange={(e) =>
+                setSchedule(e.target.value === "" ? 0 : parseInt(e.target.value))
+              }
+            />
+            <TextField
+              id="source"
+              name="source"
+              label="Source"
+              value={source}
+              onChange={(e) =>
+                setSources(e.target.value === "" ? "" : (e.target.value))
+              }
+            />
+            <InputLabel id="demo-simple-select-label">Adjustment Type
+            </InputLabel>
+                <Select onChange={(e) => handleAdjustmentTypeChange(e)}>
+                <MenuItem value="" selected disabled hidden>Select here</MenuItem>
+                  <MenuItem value="CapitalInfusion">Capital Infusion</MenuItem>
+                  <MenuItem value="shortTermLoan">Short Term Loan</MenuItem>
+                  <MenuItem value="longTermLoan">Long Term Loan</MenuItem>
+                  <MenuItem value="Funding">Funding</MenuItem>
+                  </Select>
+            <InputLabel id="demo-simple-select-label">
+                  Repay Required
+            </InputLabel>
+                <Select onChange={(e) =>
+                handleRepayFlagChange(e)
+              }>
+                  <MenuItem value={"Yes"}>Yes</MenuItem>
+                  <MenuItem value={"No"}>No</MenuItem>
+                </Select>
+                <InputLabel id="demo-simple-select-label">
+                  Repay Type
+                </InputLabel>
+                <Select onChange={(e) =>
+                handleRepayTypeChange(e)
+              }>
+                  <MenuItem value={"Monthly"}>Monthly</MenuItem>
+                  <MenuItem value={"Quarterly"}>Quarterly</MenuItem>
+                  <MenuItem value={"Annually"}>Annually</MenuItem>
+                  <MenuItem value={"FixedTerm"}>Fixed Term</MenuItem>
+                  </Select>
           </Stack>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
-      </Dialog>
-      <Snackbar
+      </Dialog>}
+      {alertOpen && <Snackbar
         open={alertOpen}
-        autoHideDuration={3000}
+        autoHideDuration={5000}
         onClose={() => setAlertOpen(false)}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
@@ -147,12 +224,12 @@ export default function AddFundOrLoan({ name }: Props) {
           severity="success"
           sx={{ width: "100%" }}
         >
-          Capital Added Successfully
+          Adjustment Amount Added Successfully
         </Alert>
-      </Snackbar>
-      <Snackbar
+      </Snackbar>}
+      {alertErrorOpen && <Snackbar
         open={alertErrorOpen}
-        autoHideDuration={3000}
+        autoHideDuration={5000}
         onClose={() => setAlertErrorOpen(false)}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
@@ -161,9 +238,9 @@ export default function AddFundOrLoan({ name }: Props) {
           severity="error"
           sx={{ width: "100%" }}
         >
-          {error}
+          {error}, Cannot add adjustment amount
         </Alert>
-      </Snackbar>
+      </Snackbar>}
     </div>
   );
 }

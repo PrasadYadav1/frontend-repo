@@ -9,15 +9,17 @@ import { cashFlowColumns } from "./componentsData/cashFlowColumns";
 import { expenseColumns } from "./componentsData/expenseColumns";
 import { revenueColumns } from "./componentsData/revenueColumns";
 import InputCapitalDialog from "./InputCapitalDialog";
-import AddFundOrLoan from "./AddFundOrLoan";
 import { MouseEvent, useState } from "react";
 import { Modal, Typography } from "@mui/material";
 import { useGetAllCashFlow } from "../hooks/useGetAllCashFlow";
+import AddAdjustment from "./AddAdjustment";
 
 export default function CashFlowPage() {
   const cashFlowData = useGetAllCashFlow(
     'http://103.242.116.207:9000/cash-flow/all'
   );
+  // const [expenseRows] = [""];
+  // const [revenueRows] = [""];
   // const cashFlowColumns = columnsData(cashFlowRows);
   const [expenseRows] = useFetch("http://103.242.116.207:9000/expense/all");
   // const expenseColumns = columnsData(expenseRows);
@@ -54,8 +56,7 @@ export default function CashFlowPage() {
         <div style={{ float: "right" }}>
           <Stack spacing={2} direction="row">
             <InputCapitalDialog />
-            <AddFundOrLoan name={"Add Loan"} />
-            <AddFundOrLoan name={"Add Funding"} />
+            <AddAdjustment name={"Add Adjustment"} />
           </Stack>
         </div>
       </div>
