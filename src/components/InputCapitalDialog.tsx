@@ -55,7 +55,6 @@ export default function InputCapitalDialog() {
   const [cashFlowData] = useFetch(
     "http://103.242.116.207:9000/api/cash-flow/all"
   );
-  console.log(cashFlowData);
 
   function refreshPage() {
     window.location.reload();
@@ -72,33 +71,28 @@ export default function InputCapitalDialog() {
   const handleDateChange = (newValue: any) => {
     setDateValue(newValue);
   };
-
   const handleSubmit = async () => {
-    let modifiedDate = changeDateFormat(
-      dateValue.toISOString().slice(0, 10).replace(/-/g, "-")
-    );
+    let modifiedDate = dateValue.toISOString();
+  
     const data = {
       capital: amount,
       date: modifiedDate,
     };
-    try {
-      const result = await axios.post(
-        "http://103.242.116.207:9000/api/cash-flow/first-create",
-        data,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
 
-      if (result.status === 200) {
+    try {
+      fetch("http://103.242.116.207:9000/capital/first-create",{
+        method:'POST',
+        headers: AuthHeader(),
+        body:JSON.stringify(data)
+      }).then((result) =>{
+        if (result.status === 200) {
         setAlertOpen(true);
         setOpen(false);
-        setTimeout(() => refreshPage(), 2000);
+        refreshPage();
       } else {
         setAlertErrorOpen(true);
         setOpen(false);
-      }
+      }})
     } catch (err: any) {
       const errorString = err.response.data;
       setError(
@@ -107,8 +101,7 @@ export default function InputCapitalDialog() {
       setAlertErrorOpen(true);
       setOpen(false);
     }
-  };
-
+  }
   return (
     <div>
       <Stack spacing={2} direction="row">
@@ -168,7 +161,7 @@ export default function InputCapitalDialog() {
           <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
+      {alertOpen &&<Snackbar
         open={alertOpen}
         autoHideDuration={3000}
         onClose={() => setAlertOpen(false)}
@@ -181,7 +174,7 @@ export default function InputCapitalDialog() {
         >
           Capital Added Successfully
         </Alert>
-      </Snackbar>
+      </Snackbar>}
       <Snackbar
         open={alertErrorOpen}
         autoHideDuration={3000}
@@ -193,9 +186,22 @@ export default function InputCapitalDialog() {
           severity="error"
           sx={{ width: "100%" }}
         >
-          {error}
+          Sorry! Capital Already Exists.
         </Alert>
       </Snackbar>
     </div>
   );
+      }
+function AuthHeader():{}{
+  const user = JSON.parse(window.localStorage.getItem("isLoggedIn") || "");
+  const accessToken = JSON.parse(window.localStorage.getItem("token") || "");
+
+  //   if user token is logged in.
+  if (user && accessToken) {
+    return { "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken} ;
+  } else {
+    return {};
+  }
 }
+
