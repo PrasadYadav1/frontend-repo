@@ -73,26 +73,26 @@ export default function InputCapitalDialog() {
   };
   const handleSubmit = async () => {
     let modifiedDate = dateValue.toISOString();
-  
+
     const data = {
       capital: amount,
       date: modifiedDate,
     };
 
     try {
-      fetch("http://103.242.116.207:9000/capital/first-create",{
-        method:'POST',
+      fetch("http://103.242.116.207:9000/capital/first-create", {
+        method: "POST",
         headers: AuthHeader(),
-        body:JSON.stringify(data)
-      }).then((result) =>{
+        body: JSON.stringify(data),
+      }).then((result) => {
         if (result.status === 200) {
-        setAlertOpen(true);
-        setOpen(false);
-        refreshPage();
-      } else {
-        setAlertErrorOpen(true);
-        setOpen(false);
-      }})
+          setAlertOpen(true);
+          setOpen(false);
+        } else {
+          setAlertErrorOpen(true);
+          setOpen(false);
+        }
+      });
     } catch (err: any) {
       const errorString = err.response.data;
       setError(
@@ -101,7 +101,7 @@ export default function InputCapitalDialog() {
       setAlertErrorOpen(true);
       setOpen(false);
     }
-  }
+  };
   return (
     <div>
       <Stack spacing={2} direction="row">
@@ -161,20 +161,22 @@ export default function InputCapitalDialog() {
           <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
-      {alertOpen &&<Snackbar
-        open={alertOpen}
-        autoHideDuration={3000}
-        onClose={() => setAlertOpen(false)}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert
+      {alertOpen && (
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={3000}
           onClose={() => setAlertOpen(false)}
-          severity="success"
-          sx={{ width: "100%" }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          Capital Added Successfully
-        </Alert>
-      </Snackbar>}
+          <Alert
+            onClose={() => setAlertOpen(false)}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Capital Added Successfully
+          </Alert>
+        </Snackbar>
+      )}
       <Snackbar
         open={alertErrorOpen}
         autoHideDuration={3000}
@@ -191,17 +193,18 @@ export default function InputCapitalDialog() {
       </Snackbar>
     </div>
   );
-      }
-function AuthHeader():{}{
+}
+function AuthHeader(): {} {
   const user = JSON.parse(window.localStorage.getItem("isLoggedIn") || "");
   const accessToken = JSON.parse(window.localStorage.getItem("token") || "");
 
   //   if user token is logged in.
   if (user && accessToken) {
-    return { "Content-Type": "application/json",
-      Authorization: "Bearer " + accessToken} ;
+    return {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken,
+    };
   } else {
     return {};
   }
 }
-

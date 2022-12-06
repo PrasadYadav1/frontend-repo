@@ -49,7 +49,7 @@ export default function EditDialog({ data }: Props) {
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [alertErrorOpen, setAlertErrorOpen] = React.useState(false);
 
-  const dataType = "expenseId" in data ? true : false;
+  const dataType = "expenseNumber" in data ? true : false;
 
   function refreshPage() {
     window.location.reload();
@@ -123,16 +123,14 @@ export default function EditDialog({ data }: Props) {
   const handleSubmit = async () => {
     let modifiedDate = dateValue;
     if (enableDate) {
-      modifiedDate = changeDateFormat(
-        dateValue.$d.toString().slice(4, 15).replace(/ /g, "-")
-      );
+      modifiedDate = dateValue.toISOString();
+      console.log(modifiedDate);
     }
     const updatedData = dataType
       ? {
           amount: parseInt(amount),
           bankName: bank,
           debitChequeNo: debitChequeNo,
-          expenseId: data.expenseId,
           expenseType: expenseType,
           recipient: recipient,
           recurringExpense: recurringExpenses,
@@ -146,7 +144,6 @@ export default function EditDialog({ data }: Props) {
           amount: parseInt(amount),
           bankName: bank,
           creditChequeNo: creditChequeNo,
-          expenseId: data.revenueId,
           revenueType: revenueType,
           payer: payer,
           recurringRevenue: recurringRevenue,
@@ -159,12 +156,13 @@ export default function EditDialog({ data }: Props) {
     try {
       const result = await axios.put(
         dataType
-          ? `http://103.242.116.207:9000/expense/${data.expenseId}`
-          : `http://103.242.116.207:9000/revenue/${data.revenueId}`,
+          ? `http://103.242.116.207:9000/expense/${data.id}`
+          : `http://103.242.116.207:9000/revenue/${data.id}`,
         updatedData
       );
 
       if (result.status === 200) {
+        console.log(updatedData);
         setAlertOpen(true);
         setOpen(false);
         setTimeout(() => refreshPage(), 2000);
@@ -173,6 +171,7 @@ export default function EditDialog({ data }: Props) {
         setOpen(false);
       }
     } catch (err) {
+      console.log(updatedData);
       setAlertErrorOpen(true);
     }
   };
@@ -190,7 +189,7 @@ export default function EditDialog({ data }: Props) {
       </Tooltip>
       <Dialog scroll="paper" open={open} onClose={handleClose}>
         <DialogTitle sx={{ color: "black", width: "400px" }}>
-          Edit Expense - {data.expenseId}
+          Edit {dataType ? "Expense" : "Revenue"} - {data.id}
         </DialogTitle>
         <DialogContent dividers={true}>
           <DialogContentText>

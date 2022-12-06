@@ -28,7 +28,7 @@ export default function AlertDialog({ data }: Props) {
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [alertErrorOpen, setAlertErrorOpen] = React.useState(false);
 
-  const dataType = "expenseId" in data ? true : false;
+  const dataType = "expenseNumber" in data ? true : false;
 
   function refreshPage() {
     window.location.reload();
@@ -42,7 +42,7 @@ export default function AlertDialog({ data }: Props) {
     setOpen(false);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     try {
       const response = await axios.delete(
         dataType === true
@@ -78,26 +78,23 @@ export default function AlertDialog({ data }: Props) {
         <DialogTitle id="alert-dialog-title" sx={{ color: "black" }}>
           {`Do you want to delete ${
             dataType === true ? "Expense" : "Revenue"
-          } - ${
-            dataType === true ? dataFromApi.expenseId : dataFromApi.revenueId
-          }?`}
+          } - ${dataType === true ? dataFromApi.id : dataFromApi.id}?`}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {`The ${
               dataType === true ? "Expense" : "Revenue"
-            } with the Date - ${
-              dataFromApi.transactionDate
-            } is going to be deleted.To continue press Agree or else press Disagree.`}
+            } with the Date - ${dataFromApi.transactionDate.substring(
+              0,
+              10
+            )} is going to be deleted.To continue press Agree or else press Disagree.`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Disagree</Button>
           <Button
             onClick={() =>
-              handleDelete(
-                dataType ? dataFromApi.expenseId : dataFromApi.revenueId
-              )
+              handleDelete(dataType ? dataFromApi.id : dataFromApi.id)
             }
             autoFocus
           >

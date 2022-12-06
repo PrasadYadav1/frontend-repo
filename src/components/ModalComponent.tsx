@@ -153,9 +153,8 @@ export default function TransitionsModal({ name, modalType }: Props) {
     },
     validationSchema: validationSchemaExpense,
     onSubmit: async (values: any, actions: any) => {
-      const selectedDate = changeDateFormat(
-        value.toISOString().slice(0, 10).replace(/-/g, "-")
-      );
+      // console.log(value.toISOString().slice(0, 10).replace(/-/g, "-"));
+      const selectedDate = value.toISOString();
       values.transactionDate = selectedDate;
       values.amount = parseInt(values.amount);
       values.expenseType = expenseType;
@@ -184,7 +183,8 @@ export default function TransitionsModal({ name, modalType }: Props) {
           setOpen(false);
         }
       } catch (err) {
-        setError("Try Adding Expense for the Dates in the Cashflow table.");
+        console.log(err);
+        setError("Expense Cannot be Added");
         setAlertErrorOpen(true);
       }
       console.log(values);
@@ -206,9 +206,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
     },
     validationSchema: validationSchemaRevenue,
     onSubmit: async (values: any, actions: any) => {
-      const selectedDate = changeDateFormat(
-        value.toISOString().slice(0, 10).replace(/-/g, "-")
-      );
+      const selectedDate = value.toISOString();
       values.transactionDate = selectedDate;
       values.amount = parseInt(values.amount);
       values.revenueType = revenueType;
@@ -237,7 +235,7 @@ export default function TransitionsModal({ name, modalType }: Props) {
           setOpen(false);
         }
       } catch (err) {
-        setError("Try Adding Revenue for the Dates in the Cashflow table.");
+        setError("Expense Cannot be Added");
         setAlertErrorOpen(true);
       }
     },
