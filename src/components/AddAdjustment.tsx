@@ -28,27 +28,16 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function AddAdjustment({ name }: Props) {
-  const getInitialRepayFlag = () => {
-    const repayFlag = "No";
-    return repayFlag;
-  };
-  const getInitialRepayType = () => {
-    const repayType = "Not Selected";
-    return repayType;
-  };
-  const getInitialAdjustmentType = () => {
-    const adjustmentType = "Not Selected";
-    return adjustmentType;
-  };
+  
 
   const [open, setOpen] = React.useState(false);
   const [dateValue, setDateValue] = React.useState(new Date());
   const [amount, setAmount] = React.useState(0);
   const [schedule, setSchedule] = React.useState(0);
   const [source, setSources] = React.useState("");
-  const [repayFlag, setRepayFlag] = React.useState(getInitialRepayFlag);
-  const [repayType, setRepayType] = React.useState(getInitialRepayType);
-  const [adjustmentType, setAdjustmentType] = React.useState(getInitialAdjustmentType);
+  const [repayFlag, setRepayFlag] = React.useState("");
+  const [repayType, setRepayType] = React.useState("");
+  const [adjustmentType, setAdjustmentType] = React.useState("");
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [alertErrorOpen, setAlertErrorOpen] = React.useState(false);
   const [error, setError] = React.useState("Oops! Some Error Occurred");
@@ -80,7 +69,6 @@ export default function AddAdjustment({ name }: Props) {
   const handleAdjustmentTypeChange = (e:any) => {
     setAdjustmentType(e.target.value);
   };
-
   const handleSubmit = async () => {
     let modifiedDate = dateValue.toISOString();
     const data = {
@@ -95,15 +83,13 @@ export default function AddAdjustment({ name }: Props) {
     try {
       fetch("http://103.242.116.207:9000/adjustment/create",{
         method:'POST',
-        headers:{
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: AuthHeader(),
         body:JSON.stringify(data)
       }).then((result) =>{
         if (result.status === 200) {
         setAlertOpen(true);
         setOpen(false);
+        setTimeout(() => refreshPage(), 2000);
       } else {
         setAlertErrorOpen(true);
         setOpen(false);
@@ -130,7 +116,8 @@ export default function AddAdjustment({ name }: Props) {
           {name}
         </Button>
       </Stack>
-      {open && <Dialog scroll="paper" open={open} onClose={handleClose}>
+      {open && 
+        <Dialog scroll="paper" open={open} onClose={handleClose}>
         <DialogTitle sx={{ color: "black" }}>{name} Amount</DialogTitle>
         <DialogContent dividers={true}>
           <Stack spacing={3}>
@@ -145,7 +132,7 @@ export default function AddAdjustment({ name }: Props) {
                 )}
               />
             </LocalizationProvider>
-            <TextField
+          <TextField
               id="amount"
               name="amount"
               label="Amount"
@@ -158,7 +145,38 @@ export default function AddAdjustment({ name }: Props) {
               onChange={(e) =>
                 setAmount(e.target.value === "" ? 0 : parseInt(e.target.value))
               }
+          />
+          <TextField
+              id="source"
+              name="source"
+              label="Source"
+              value={source}
+              onChange={(e) =>
+                setSources(e.target.value === "" ? "" : (e.target.value))
+              }
             />
+          <InputLabel id="adjustment-type">Adjustment Type</InputLabel>
+              <Select onChange={(e) => handleAdjustmentTypeChange(e)}>
+                <MenuItem value="" selected disabled hidden>Select here</MenuItem>
+                  <MenuItem value="CapitalInfusion">Capital Infusion</MenuItem>
+                  <MenuItem value="shortTermLoan">Short Term Loan</MenuItem>
+                  <MenuItem value="longTermLoan">Long Term Loan</MenuItem>
+                  <MenuItem value="Funding">Funding</MenuItem>
+              </Select>
+            <InputLabel id="repay-flag">Repay Required</InputLabel>
+              <Select onChange={(e) =>handleRepayFlagChange(e)}>  
+                  <MenuItem value="" selected disabled hidden>Select here</MenuItem>
+                  <MenuItem value={"Yes"}>Yes</MenuItem>
+                  <MenuItem value={"No"}>No</MenuItem>
+                </Select>
+            <InputLabel id="repay-type">Repay Type</InputLabel>
+                <Select onChange={(e) =>handleRepayTypeChange(e)}>  
+                  <MenuItem value="" selected disabled hidden>Select here</MenuItem>
+                  <MenuItem value={"Monthly"}>Monthly</MenuItem>
+                  <MenuItem value={"Quarterly"}>Quarterly</MenuItem>
+                  <MenuItem value={"Annually"}>Annually</MenuItem>
+                  <MenuItem value={"FixedTerm"}>Fixed Term</MenuItem>
+                  </Select>
             <TextField
               id="schedule"
               name="schedule"
@@ -168,44 +186,6 @@ export default function AddAdjustment({ name }: Props) {
                 setSchedule(e.target.value === "" ? 0 : parseInt(e.target.value))
               }
             />
-            <TextField
-              id="source"
-              name="source"
-              label="Source"
-              value={source}
-              onChange={(e) =>
-                setSources(e.target.value === "" ? "" : (e.target.value))
-              }
-            />
-            <InputLabel id="demo-simple-select-label">Adjustment Type
-            </InputLabel>
-                <Select onChange={(e) => handleAdjustmentTypeChange(e)}>
-                <MenuItem value="" selected disabled hidden>Select here</MenuItem>
-                  <MenuItem value="CapitalInfusion">Capital Infusion</MenuItem>
-                  <MenuItem value="shortTermLoan">Short Term Loan</MenuItem>
-                  <MenuItem value="longTermLoan">Long Term Loan</MenuItem>
-                  <MenuItem value="Funding">Funding</MenuItem>
-                  </Select>
-            <InputLabel id="demo-simple-select-label">
-                  Repay Required
-            </InputLabel>
-                <Select onChange={(e) =>
-                handleRepayFlagChange(e)
-              }>
-                  <MenuItem value={"Yes"}>Yes</MenuItem>
-                  <MenuItem value={"No"}>No</MenuItem>
-                </Select>
-                <InputLabel id="demo-simple-select-label">
-                  Repay Type
-                </InputLabel>
-                <Select onChange={(e) =>
-                handleRepayTypeChange(e)
-              }>
-                  <MenuItem value={"Monthly"}>Monthly</MenuItem>
-                  <MenuItem value={"Quarterly"}>Quarterly</MenuItem>
-                  <MenuItem value={"Annually"}>Annually</MenuItem>
-                  <MenuItem value={"FixedTerm"}>Fixed Term</MenuItem>
-                  </Select>
           </Stack>
         </DialogContent>
         <DialogActions>
@@ -243,4 +223,17 @@ export default function AddAdjustment({ name }: Props) {
       </Snackbar>}
     </div>
   );
+}
+
+function AuthHeader():{}{
+  const user = JSON.parse(window.localStorage.getItem("isLoggedIn") || "");
+  const accessToken = JSON.parse(window.localStorage.getItem("token") || "");
+
+  //   if user token is logged in
+  if (user && accessToken) {
+    return { "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken} ;
+  } else {
+    return {};
+  }
 }
